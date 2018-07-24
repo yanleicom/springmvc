@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanlei.dao.ZdpycYearDao">
+
+    <delete id="delZdpycYearAll" >
+    DELETE  FROM  zdpyc_year
+    </delete>
+
+    <delete id="delZdpycMonthAll" >
+        DELETE  FROM  zdpyc_month
+    </delete>
+
+    <delete id="delZdpycDayAll" >
+        DELETE  FROM  zdpyc_day
+    </delete>
+
+    <insert id="addZdpycYearList" parameterType="java.util.List">
+        insert into zdpyc_year
+        (column1,column2,column3,updatetime)
+        values
+        <foreach collection="list" item="zdpycYear" separator=",">
+            (#{zdpycYear.column1},#{zdpycYear.column2},#{zdpycYear.column3},#{zdpycYear.updatetime})
+        </foreach>
+    </insert>
+
+    <insert id="addZdpycMonthList" parameterType="java.util.List">
+        insert into zdpyc_month
+        (column1,column2,column3,updatetime)
+        values
+        <foreach collection="list" item="zdpycMonth" separator=",">
+            (#{zdpycMonth.column1},#{zdpycMonth.column2},#{zdpycMonth.column3},#{zdpycMonth.updatetime})
+        </foreach>
+    </insert>
+
+    <insert id="addZdpycDayList" parameterType="java.util.List">
+        insert into zdpyc_day
+        (column1,column2,column3,updatetime)
+        values
+        <foreach collection="list" item="zdpycDay" separator=",">
+            (#{zdpycDay.column1},#{zdpycDay.column2},#{zdpycDay.column3},#{zdpycDay.updatetime})
+        </foreach>
+    </insert>
+
+
+</mapper>

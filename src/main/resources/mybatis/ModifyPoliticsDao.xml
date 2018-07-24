@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanlei.dao.ModifyPoliticsDao.ModifyPoliticsDao">
+
+    <update id="updateDepartment" parameterType="java.util.List" >
+        <foreach collection="list" item="record" index="index"  open="" close="" separator=";">
+            update government_department
+            <set >
+                <if test="record.name != null" >
+                    name = #{record.name,jdbcType=VARCHAR},
+                </if>
+                <if test="record.intValue != null" >
+                    int_value = #{record.intValue,jdbcType=BIGINT},
+                </if>
+                <if test="record.doubleValue != null" >
+                    double_value = #{record.doubleValue,jdbcType=DOUBLE},
+                </if>
+                <if test="record.acquisitionTime != null" >
+                    acquisition_time = #{record.acquisitionTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.cycle != null" >
+                    cycle = #{record.cycle,jdbcType=VARCHAR},
+                </if>
+                <if test="record.departmentId != null" >
+                    department_id = #{record.departmentId,jdbcType=INTEGER},
+                </if>
+                <if test="record.unit != null" >
+                    unit = #{record.unit,jdbcType=VARCHAR},
+                </if>
+                <if test="record.type != null" >
+                    type = #{record.type,jdbcType=VARCHAR},
+                </if>
+                <if test="record.level != null" >
+                    level = #{record.level,jdbcType=VARCHAR},
+                </if>
+                <if test="record.level2 != null" >
+                    level2 = #{record.level2,jdbcType=VARCHAR},
+                </if>
+                <if test="record.level3 != null" >
+                    level3 = #{record.level3,jdbcType=VARCHAR},
+                </if>
+                <if test="record.source != null" >
+                    source = #{record.source,jdbcType=VARCHAR},
+                </if>
+            </set>
+            where id = #{record.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+
+    <delete id="delDepartmentOne" parameterType="java.lang.Integer" >
+        DELETE FROM government_department WHERE id = #{0}
+    </delete>
+
+</mapper>

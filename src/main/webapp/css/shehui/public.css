@@ -1,0 +1,29 @@
+@charset "utf-8";
+/* CSS Document */
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,select figure{margin:0;padding:0;} 
+body{font:12px  ""; word-wrap:break-word;}
+a,u,s,del{color:#666;text-decoration:none;} 
+a img,.bor0 {border:0;}
+i,em,b{font-style:normal;font-weight:100;}
+li{list-style:none;}
+img{vertical-align:middle;} 
+table{border-collapse:collapse;}
+.ind2{text-indent:2em;} 
+mark{background:none;}
+input,textarea{outline:none}/*谷歌去除蓝色边框*/
+textarea{resize:none;}/*多行文本固定尺寸不能拖动*/
+
+/*文本溢出 出现省略号*/
+.over:after{connent:"";overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+/*垂直对齐方式*/
+.valign:after{content:"";display:inline-block;width:0;height:100%;vertical-align:middle;}
+
+/*万能清除法*/
+.clear{zoom:1;}
+.clear:before{content:"";display:table;}
+.clear:after{content:"";display:block;clear:both;}
+/*鼠标手势点*/
+.cu{cursor:pointer;}
+/*去除ie图片边框*/
+a img{border:0;}

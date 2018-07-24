@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<bean name="job1" class="com.yanlei.controller.quartz.GongWenController"/>
+	<bean id="jobDetail_1" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 执行的类 -->
+		<property name="targetObject">
+			<ref bean="job1" />
+		</property>
+		<!-- 类中的方法 -->
+		<property name="targetMethod">
+			<value>insertGongWen</value>
+		</property>
+	</bean>
+
+	<bean id="cronTrigger_1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="jobDetail_1" />
+		</property>
+		<!-- 每五分钟执行一次 0 0/5 * * * ?-->
+		<property name="cronExpression">
+			<value>0 0/15 9-19 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 任务2配置 交换量统计 -->
+	<!--<bean name="job2" class="com.yanlei.controller.quartz.ExchangeController"/>
+	<bean id="jobDetail_2" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="job2" />
+		</property>
+		<property name="targetMethod">
+			<value>showExchange</value>
+		</property>
+	</bean>
+	<bean id="cronTrigger_2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="jobDetail_2" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0/2 * * * ?</value>
+		</property>
+	</bean>
+
+    &lt;!&ndash; 任务3配置 交换总量统计&ndash;&gt;
+    <bean name="job3" class="com.yanlei.controller.quartz.ExchangeController"/>
+    <bean id="jobDetail_3" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <ref bean="job3" />
+        </property>
+        <property name="targetMethod">
+            <value>showExchangeSum</value>
+        </property>
+    </bean>
+    <bean id="cronTrigger_3" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail">
+            <ref bean="jobDetail_3" />
+        </property>
+        <property name="cronExpression">
+            <value>0 0/2 * * * ?</value>
+        </property>
+    </bean>
+
+	&lt;!&ndash; 任务4配置 今日交换部门统计&ndash;&gt;
+	<bean name="job4" class="com.yanlei.controller.quartz.ExchangeController"/>
+	<bean id="jobDetail_4" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="job4" />
+		</property>
+		<property name="targetMethod">
+			<value>showExchangeBuMeng</value>
+		</property>
+	</bean>
+	<bean id="cronTrigger_4" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="jobDetail_4" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0/2 * * * ?</value>
+		</property>
+	</bean>
+
+	&lt;!&ndash; 任务5配置 数据共享 and 数据归集 &ndash;&gt;
+	<bean name="job5" class="com.yanlei.controller.quartz.ExchangeController"/>
+	<bean id="jobDetail_5" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="job5" />
+		</property>
+		<property name="targetMethod">
+			<value>showShareList</value>
+		</property>
+	</bean>
+	<bean id="cronTrigger_5" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="jobDetail_5" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0/30 * * * ?</value>
+		</property>
+	</bean>-->
+
+	<!-- 任务5配置 数据共享 and 数据归集 -->
+	<bean name="job6" class="com.yanlei.controller.quartz.GongWenController"/>
+	<bean id="jobDetail_6" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 执行的类 -->
+		<property name="targetObject">
+			<ref bean="job6" />
+		</property>
+		<!-- 类中的方法 -->
+		<property name="targetMethod">
+			<value>showTenDaysExchange</value>
+		</property>
+	</bean>
+
+	<bean id="cronTrigger_6" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="jobDetail_6" />
+		</property>
+		<!-- 9点到晚上7点 每一小时执行一次 -->
+		<property name="cronExpression">
+			<value>0 0/60 9-19 * * ?</value>
+		</property>
+	</bean>
+
+
+
+	<!-- 总配置 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<!-- 添加触发器 -->
+		<property name="triggers">
+			<list>
+				<ref bean="cronTrigger_1" />
+				<!--<ref bean="cronTrigger_2" />-->
+				<!--<ref bean="cronTrigger_3" />-->
+				<!--<ref bean="cronTrigger_4" />-->
+				<!--<ref bean="cronTrigger_5" />-->
+				<ref bean="cronTrigger_6" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

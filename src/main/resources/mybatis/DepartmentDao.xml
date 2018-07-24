@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanlei.dao.DepartmentDao">
+    <delete id="delDepartmentQjwAll">
+        DELETE FROM department_qjw
+    </delete>
+
+    <delete id="delDepartmentQwbAll">
+        DELETE FROM department_qwb
+    </delete>
+
+    <delete id="delDepartmentRdbAll">
+        DELETE FROM department_rdb
+    </delete>
+
+    <delete id="delDepartmentZfbAll">
+        DELETE FROM department_zfb
+    </delete>
+
+    <delete id="delDepartmentZxAll">
+        DELETE FROM department_zx
+    </delete>
+
+
+    <insert id="addDepartmentQjwList" parameterType="java.util.List">
+        insert into department_qjw
+        (department, number, updatatime)
+        values
+        <foreach collection ="list" item="departmentQjw" separator =",">
+            (#{departmentQjw.department},#{departmentQjw.number},#{departmentQjw.updatatime})
+        </foreach >
+    </insert>
+
+    <insert id="addDepartmentQwbList" parameterType="java.util.List">
+        insert into department_qwb
+        (department, number, updatatime)
+        values
+        <foreach collection ="list" item="departmentQwb" separator =",">
+            (#{departmentQwb.department},#{departmentQwb.number},#{departmentQwb.updatatime})
+        </foreach >
+    </insert>
+
+    <insert id="addDepartmentRdbList" parameterType="java.util.List">
+        insert into department_rdb
+        (department, number, updatatime)
+        values
+        <foreach collection ="list" item="departmentRdb" separator =",">
+            (#{departmentRdb.department},#{departmentRdb.number},#{departmentRdb.updatatime})
+        </foreach >
+    </insert>
+
+    <insert id="addDepartmentZfbList" parameterType="java.util.List">
+        insert into department_zfb
+        (department, number, updatatime)
+        values
+        <foreach collection ="list" item="departmentZfb" separator =",">
+            (#{departmentZfb.department},#{departmentZfb.number},#{departmentZfb.updatatime})
+        </foreach >
+    </insert>
+
+    <insert id="addDepartmentZxList" parameterType="java.util.List">
+        insert into department_zx
+        (department, number, updatatime)
+        values
+        <foreach collection ="list" item="departmentZx" separator =",">
+            (#{departmentZx.department},#{departmentZx.number},#{departmentZx.updatatime})
+        </foreach >
+    </insert>
+
+</mapper>

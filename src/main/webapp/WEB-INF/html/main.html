@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="./css/main/bootstrap.min.css" />
+		<link rel="stylesheet" href="./css/main/bootstrap-theme.min.css" />
+		<link rel="stylesheet" href="./css/main/style.min.css" />
+		<link rel="stylesheet" href="./css/main/public.css" />
+		<script type="text/javascript" src="./js/main/jquery-2.1.0.min.js"></script>
+		<!--<script type="text/javascript" src="./js/main/Chart.min.js"></script>-->
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+		<script type="text/javascript" src="./js/main/echarts-tooltip-carousel.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<div class="session-1" >
+				<div class='session-1-left'><img  src="./img/main/fontCut/下城区数据公示板.png" alt=""></div>
+				<!--<div class='session-1-right' >
+					<b class='valign'></b>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>-->
+				<div class='session-1-right' >
+					<div class='exchange '>
+						<img class='valign' src="./img/main/fontCut/交换总量.png" alt="">
+					</div>
+					<div class='exchange2 '>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
+			</div>
+			<div class="session-2" >
+				<div class="left jd">
+					<img class='tu'src="./img/main/map2.png" alt="">
+					<div id='gao' ></div>
+					<ul class='ul1'>
+						<li style="opacity: 1;">
+							<b class='shi'></b>
+							<b class='dong'></b>
+							<b class='zhao'></b>
+							<b class='wen'></b>
+							<b class='tian'></b>
+							<b class='wu'></b>
+							<b class='chang'></b>
+							<b class='chao'></b>
+							<b class='shi1'></b>
+							<b class='dong1'></b>
+							<b class='zhao1'></b>
+							<b class='wen1'></b>
+							<b class='tian1'></b>
+							<b class='wu1'></b>
+							<b class='chang1'></b>
+							<b class='chao1'></b>
+							<div id="map1" style="display: inline-block;" class='table' >
+				            	<div class='left_r_event'>
+									<b>下城区人口总数</b>
+									<div><span>2657</span>万人</div>
+								</div>
+								<div class='left_r_count' id='left_r_count' style="">
+								</div>
+							</div>
+						</li>
+						<li>
+							<b class='l_shi shi'></b>
+							<b class='l_dong dong'></b>
+							<b class='l_zhao zhao'></b>
+							<b class='l_wen wen'></b>
+							<b class='l_tian tian'></b>
+							<b class='l_wu wu'></b>
+							<b class='l_chang chang'></b>
+							<b class='l_chao chao'></b>
+							<b class='l_shi1 shi1'></b>
+							<b class='l_dong1 dong1'></b>
+							<b class='l_zhao1 zhao1'></b>
+							<b class='l_wen1 wen1'></b>
+							<b class='l_tian1 tian1'></b>
+							<b class='l_wu1 wu1'></b>
+							<b class='l_chang1 chang1'></b>
+							<b class='l_chao1 chao1'></b>
+							<div id="map2" style="display: inline-block;" class='table' >
+				            	<div class='left_r_event left_r_event2 '>
+									<b>下城区楼宇入住总数</b>
+									<div><span>256</span>万平方米</div>
+									<b>下城区楼宇总面积</b>
+									<div><span>256</span>万平方米</div>
+								</div>
+								<div class='left_r_count' id='left_r_count2' style="">
+								</div>
+							</div>
+						</li>
+						<li>
+							<b class='s_shi shi'></b>
+							<b class='s_dong dong'></b>
+							<b class='s_zhao zhao'></b>
+							<b class='s_wen wen'></b>
+							<b class='s_tian tian'></b>
+							<b class='s_wu wu'></b>
+							<b class='s_chang chang'></b>
+							<b class='s_chao chao'></b>
+							<b class='s_shi1 shi1'></b>
+							<b class='s_dong1 dong1'></b>
+							<b class='s_zhao1 zhao1'></b>
+							<b class='s_wen1 wen1'></b>
+							<b class='s_tian1 tian1'></b>
+							<b class='s_wu1 wu1'></b>
+							<b class='s_chang1 chang1'></b>
+							<b class='s_chao1 chao1'></b>
+							<div id="map3" style="display: inline-block;" class='table' >
+				            	<div class='left_r_event'>
+									<b>下城区税收总数</b>
+									<div><span>256</span>亿元</div>
+								</div>
+								<div class='left_r_count' id='left_r_count3'>
+								</div>
+							</div>
+						</li>
+						<li>
+							<b class='bg3 b1'></b>
+							<b class='bg3 b2'></b>
+							<b class='bg3 b3'></b>
+							<b class='bg3 b4'></b>
+							<b class='bg3 b5'></b>
+							<b class='bg3 b6'></b>
+							<b class='bg3 b7'></b>
+							<b class='bg3 b8'></b>
+							<!--<img class='i4' src="./img/main/呼吸点/3-1.png" alt="">-->
+							<div id="map4" style="display: inline-block;" class='table' >
+				            	<div class='left_r_event'>
+									<b>下城区从业人员总数</b>
+									<div><span>49.23</span>万人</div>
+								</div>
+								<div class='left_r_count' id='left_r_count4'>
+								</div>
+							</div>
+						</li>
+						<li>
+							<b class='bg4 b1'></b>
+							<b class='bg4 b2'></b>
+							<b class='bg4 b3'></b>
+							<b class='bg4 b4'></b>
+							<b class='bg4 b5'></b>
+							<b class='bg4 b6'></b>
+							<b class='bg4 b7'></b>
+							<b class='bg4 b8'></b>
+							<!--<img class='i1' src="./img/main/呼吸点/7-1.png" alt="">-->
+							<div id="map5" style="display: inline-block;" class='table' >
+				            	<div class='left_r_event' >
+									<b>下城区卫生机构总数</b>
+									<div><span>221</span>个</div>
+								</div>
+								<div class='left_r_count' id='left_r_count5'>
+								</div>
+							</div>
+						</li>
+						<li>
+							<b class='bg5 b1'></b>
+							<b class='bg5 b2'></b>
+							<b class='bg5 b3'></b>
+							<b class='bg5 b4'></b>
+							<b class='bg5 b5'></b>
+							<b class='bg5 b6'></b>
+							<b class='bg5 b7'></b>
+							<b class='bg5 b8'></b>
+							<!--<img class='i1' src="./img/main/呼吸点/7-1.png" alt="">-->
+							<div id="map6" style="display: inline-block; " class='table' >
+				            	<div class='left_r_event'>
+									<b>下城区教育机构总数</b>
+									<div class='jb'><span>71</span>个</div>
+								</div>
+								<div class='left_r_count' id='left_r_count6' >
+								</div>
+							</div>
+						</li>
+					</ul>
+					<ol>
+						<li class="active" ><img  src="./img/main/fontCut/人口.png" alt=""></li>
+						<li ><img  src="./img/main/fontCut/楼宇.png" alt=""></li>
+						<li ><img  src="./img/main/fontCut/税收.png" alt=""></li>
+						<li ><img  src="./img/main/fontCut/就业.png" alt=""></li>
+						<li ><img  src="./img/main/fontCut/卫计.png" alt=""></li>
+						<li ><img  src="./img/main/fontCut/教育.png" alt=""></li>
+					</ol>
+					<a href="javascript:;" id="left9">&lt;</a>
+					<a href="javascript:;" id="right9">&gt;</a>
+				</div>
+				<div class='center'>
+					<div class="center-t">
+						<ul class='center-t-ul'>
+							<li style="opacity:1;display: inline-block;">
+				            	<div  class='jd21'  class='table' >
+				            		<div class='ul21'>
+				            			<div class='ul21_li' id='pie1'></div>
+				            			<div class='ul21_li' id='pie12'  ></div>
+				            			<div class='ul21_li' id='pie13'  ></div>
+				            			<div class='ul21_li' id='pie14'  ><img src="https://img12.360buyimg.com/da/jfs/t5614/73/8258277091/129172/cd6b7ea5/59793d03N8173f093.jpg" alt="" /></div>
+				            			<div class='ul21_li' id='pie15'  ><img src="https://img11.360buyimg.com/babel/jfs/t6886/165/1330183705/71170/e069d1e5/59802506N0c042758.jpg" alt="" /></div>
+				            		</div>
+				            		<div class='ol21'>
+				            			<div class="active21 ol21_li">1</div>
+				            			<div class='ol21_li'>2</div>
+				            			<div class='ol21_li'>3</div>
+				            			<div class='ol21_li'>4</div>
+				            			<div class='ol21_li'>5</div>
+				            		</div>
+									<a href="javascript:;" id="left21">&lt;</a>
+									<a href="javascript:;" id="right21">&gt;</a>
+								</div>
+				            </li>
+				            <li>
+								<div  class='jd22' style="display: inline-block;" class='table' >
+				            		<div class='ul22'>
+				            			<div class='ul22_li' id='pie21' ></div>
+				            			<!--<div class='ul22_li' id='pie22'  >22</div>-->
+				            			<!--<div class='ul22_li' id='pie23'  >33</div>
+				            			<div class='ul22_li' id='pie24'><img src="https://img12.360buyimg.com/da/jfs/t5614/73/8258277091/129172/cd6b7ea5/59793d03N8173f093.jpg" alt="" /></div>
+				            			<div class='ul22_li' id='pie25' ><img src="https://img11.360buyimg.com/babel/jfs/t6886/165/1330183705/71170/e069d1e5/59802506N0c042758.jpg" alt="" /></div>-->
+				            		</div>
+				            		<div class='ol22'>
+				            			<div class="active22 ol22_li">1</div>
+				            			<!--<div class='ol22_li'>2</div>-->
+				            			<!--<div class='ol22_li'>3</div>
+				            			<div class='ol22_li'>4</div>
+				            			<div class='ol22_li'>5</div>-->
+				            		</div>
+									<a href="javascript:;" id="left22">&lt;</a>
+									<a href="javascript:;" id="right22">&gt;</a>
+								</div>
+				            </li>
+						</ul>
+						<ol class='center-t-ol'>
+							<li class="active" title="0">1</li>
+							<li title="1">1</li>
+						</ol>
+						<a href="javascript:;" id="left2">&lt;</a>
+						<a href="javascript:;" id="right2">&gt;</a>
+					</div>
+					<div class="center-b">
+						<ul class="ul3">
+							<li style="opacity: 1;">
+								<span>单位（件）</span>
+								<h3></h3>
+								<div id="finance"></div>
+							</li>
+							<li>
+								<span>单位（件）</span>
+								<h3></h3>
+								<div id="finance2"></div>
+							</li>
+							<li>
+								<span>单位（件）</span>
+								<h3></h3>
+								<div id="finance3"></div>
+							</li>
+							<li>
+								<span>单位（件）</span>
+								<h3></h3>
+								<div id="finance4"></div>
+							</li>
+						</ul>
+						<ol class="ol3">
+							<li class="active" title="0">1</li>
+							<li title="1">1</li>
+							<li title="2">1</li>
+							<li title="3">1</li>
+						</ol>
+						<a href="javascript:;" id="left8">&lt;</a>
+						<a href="javascript:;" id="right8">&gt;</a>
+					</div>
+				</div>
+				<div class='right'>
+					<div class='right-t'>
+						<div class='send'></br><span></span></div>
+						<div class='send'></br><span></span></div>
+					</div>
+				    <div class='right-c'>
+				    	<span>单位（件）</span>
+				  		<div id='share'></div>
+				    </div>
+					<div class='right-b'>
+						<h3></h3>
+			    		<ul class='data'>
+			    			<li style="display:flex;justify-content:flex-start;">
+			    				<div class='right-b_left'></div>
+			    				<div class='right-b_right'><span></span><b></b>条</div>
+			    			</li>
+			    			<li style="display:flex;justify-content:flex-start;">
+			    				<div class='right-b_left'></div>
+			    				<div class='right-b_right'><span></span><b></b>条</div>
+			    			</li>
+			    			<li style="display:flex;justify-content:flex-start;">
+			    				<div class='right-b_left'></div>
+			    				<div class='right-b_right'><span></span><b></b>条</div>
+			    			</li>
+			    			<li style="display:flex;justify-content:flex-start;">
+			    				<div class='right-b_left'></div>
+			    				<div class='right-b_right'><span></span><b></b>条</div>
+			    			</li>
+			    			<li style="display:flex;justify-content:flex-start;">
+			    				<div class='right-b_left'></div>
+			    				<div class='right-b_right'><span></span><b></b>条</div>
+			    			</li>
+			    		</ul>
+					</div>
+				</div>
+			</div>	
+		</div>
+		<script src='./js/main/map.js'></script>
+		<script src='./js/main/pie.js'></script>
+		<script src='./js/main/line.js'></script>
+		<script src='./js/main/session-1-right.js'></script>
+		<script src='./js/main/right-top.js'></script>
+		<script src='./js/main/share.js'></script>
+		<script src='./js/main/table.js'></script>
+	</body>
+	
+
+</html>

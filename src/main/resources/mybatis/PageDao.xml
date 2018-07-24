@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanlei.dao.showData.PageDao">
+
+    <select id="findName" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT
+            name
+        FROM
+            government_page
+        WHERE `level` = #{0}
+            GROUP BY `name`
+    </select>
+
+    <select id="findNameAndValue" parameterType="java.lang.String" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+            id,
+            NAME,
+            int_value AS intValue,
+            unit,
+            level2,
+            source
+        FROM
+            government_page
+        WHERE
+            `name` = #{0}
+        AND `level` = #{1}
+        ORDER BY
+            int_value DESC
+    </select>
+
+
+    <select id="findJieDao" parameterType="com.yanlei.model.GovernmentDepartment" resultType="com.yanlei.model.GovernmentDepartment">
+
+          SELECT
+            `name`,
+            COUNT(0) AS intValue
+        FROM
+            government_page
+        WHERE
+            `level` = #{level}
+        AND `name` LIKE concat(concat('%',#{name}),'%')
+        AND acquisition_time > #{acquisitionTime}
+        GROUP BY
+            `name`
+    </select>
+
+
+    <select id="firstFive" parameterType="com.yanlei.model.GovernmentDepartment" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+            name, COUNT(0) AS intValue
+        FROM
+            government_page
+        WHERE
+            `level` = #{level}
+        AND acquisition_time > #{acquisitionTime}
+        GROUP BY
+            `name`
+        ORDER BY
+	      intValue DESC limit 5
+    </select>
+
+    <select id="lastFive" parameterType="com.yanlei.model.GovernmentDepartment" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+            name, COUNT(0) AS intValue
+        FROM
+            government_page
+        WHERE
+            `level` = #{level}
+        AND acquisition_time > #{acquisitionTime}
+        GROUP BY
+            `name`
+        ORDER BY
+	      intValue ASC limit 5
+    </select>
+
+
+    <select id="showPageMonthSum" parameterType="com.yanlei.model.GovernmentDepartment" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+            cycle,
+            COUNT(0) AS intValue
+        FROM
+            government_page
+        WHERE
+            `level` = #{level}
+        AND acquisition_time > #{acquisitionTime}
+        GROUP BY
+            cycle
+    </select>
+
+    <select id="showPageMonth" parameterType="java.lang.String" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+            name,
+            COUNT(0) AS intValue
+        FROM
+            government_page
+        WHERE
+            `level` = #{0}
+        AND cycle = #{1}
+        GROUP BY
+            name
+        ORDER BY
+            intValue DESC
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Long" parameterType="java.lang.String">
+        SELECT SUM(int_value) AS intValue from government_page WHERE `name` = #{0}
+    </select>
+</mapper>

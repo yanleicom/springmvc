@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanlei.dao.LegalPersonDao">
+
+    <delete id="delSSRegionAll">
+        DELETE FROM ss_region
+    </delete>
+
+    <delete id="delSSIndustryAll">
+        DELETE FROM ss_industry
+    </delete>
+
+    <delete id="delSSMoneyAll">
+        DELETE FROM ss_money
+    </delete>
+
+    <delete id="delSSWorkmanAll">
+        DELETE FROM ss_workman
+    </delete>
+
+    <delete id="delSSRevenueAll">
+        DELETE FROM ss_revenue
+    </delete>
+
+    <insert id="addSSRegionList" parameterType="java.util.List">
+        insert into ss_region
+        (name, proportion,number,updatetime)
+        values
+        <foreach collection ="list" item="ssRegion" separator =",">
+            (#{ssRegion.name},#{ssRegion.proportion},#{ssRegion.number},#{ssRegion.updatetime})
+        </foreach >
+    </insert>
+
+    <insert id="addSSIndustryList" parameterType="java.util.List">
+        insert into ss_industry
+        (name, proportion,number,updatetime)
+        values
+        <foreach collection ="list" item="ssIndustry" separator =",">
+            (#{ssIndustry.name},#{ssIndustry.proportion},#{ssIndustry.number},#{ssIndustry.updatetime})
+        </foreach >
+    </insert>
+
+    <insert id="addSSMoneyList" parameterType="java.util.List">
+        insert into ss_money
+        (name, proportion,number,updatetime)
+        values
+        <foreach collection ="list" item="ssMoney" separator =",">
+            (#{ssMoney.name},#{ssMoney.proportion},#{ssMoney.number},#{ssMoney.updatetime})
+        </foreach >
+    </insert>
+
+    <insert id="addSSWorkmanList" parameterType="java.util.List">
+        insert into ss_workman
+        (name, proportion,number,updatetime)
+        values
+        <foreach collection ="list" item="ssWorkman" separator =",">
+            (#{ssWorkman.name},#{ssWorkman.proportion},#{ssWorkman.number},#{ssWorkman.updatetime})
+        </foreach >
+    </insert>
+
+    <insert id="addSSRevenueList" parameterType="java.util.List">
+        insert into ss_revenue
+        (name, proportion,number,updatetime)
+        values
+        <foreach collection ="list" item="ssRevenue" separator =",">
+            (#{ssRevenue.name},#{ssRevenue.proportion},#{ssRevenue.number},#{ssRevenue.updatetime})
+        </foreach >
+    </insert>
+
+</mapper>

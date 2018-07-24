@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanlei.dao.showData.SheHuiDao">
+
+    <select id="findPeopleSum" resultType="java.lang.Integer">
+        SELECT COUNT(0) from mzj_rkxxjl
+    </select>
+
+    <select id="findManPeople" resultType="java.lang.Integer">
+       SELECT COUNT(0) from mzj_rkxxjl WHERE sex = #{0}
+    </select>
+
+    <select id="findJieDaoPeople" resultType="com.yanlei.model.shehui.People">
+        SELECT COUNT(0) AS intValue,streetname AS streetName FROM mzj_rkxxjl GROUP BY streetname
+    </select>
+
+    <select id="findZhlx" resultType="java.lang.String">
+        SELECT zhlx FROM mzj_rkxxjl GROUP BY zhlx
+    </select>
+
+    <select id="findFenZhlx" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT COUNT(0) FROM mzj_rkxxjl WHERE zhlx = #{0}
+    </select>
+
+    <select id="findQita"  resultType="java.lang.Integer">
+        SELECT COUNT(0) FROM mzj_rkxxjl WHERE zhlx is NULL
+    </select>
+
+
+
+    <!--从这开始查询address地区表信息-->
+    <select id="countyNames" resultType="java.lang.String">
+        SELECT ssCounty FROM address GROUP BY ssCounty
+    </select>
+
+    <select id="findQuYuPeople"  parameterType="java.lang.String" resultType="com.yanlei.model.shehui.People">
+        SELECT ssTownship AS streetName,COUNT(0) AS intValue FROM address WHERE ssCounty = #{0} GROUP BY ssTownship
+    </select>
+
+
+
+    <select id="findEnterprise" parameterType="java.lang.String" resultType="com.yanlei.model.shehui.Enterprise">
+        SELECT SUM(shhj) AS shhjSum,SUM(czzsr) AS czzsrSum,czfp AS  czfpName from czj_zdqyxxb where ofyear = #{0} GROUP BY czfp
+    </select>
+
+    <select id="findMonthsAndCount" resultType="com.yanlei.model.luxi.EventModel">
+        SELECT
+            DATE_FORMAT(tong_time, '%Y-%m') months,count(0) AS count
+        FROM
+            `event`
+        GROUP BY
+            months
+    </select>
+
+    <select id="findWorkClass" parameterType="java.lang.String" resultType="com.yanlei.model.luxi.EventModel">
+        SELECT workClass,COUNT(0) AS count FROM `event` WHERE tong_time like concat(concat(#{0}),'%') GROUP BY workClass
+    </select>
+
+
+    <select id="findBuilding" resultType="com.yanlei.model.shehui.People">
+        SELECT
+            a.intValue,
+            b.street_name AS streetName
+        FROM
+            (
+                SELECT
+                    COUNT(0) AS intValue,
+                    street_id
+                FROM
+                    building_in_analysis
+                GROUP BY
+                    street_id
+            ) AS a
+        LEFT JOIN building AS b ON a.street_id = b.street_id
+        GROUP BY
+	        b.street_name
+    </select>
+
+
+   <!-- <select id="showBuildingArea" resultType="com.yanlei.model.shehui.BuildingArea">
+        SELECT
+			SUM(a.total_area) AS totalArea,
+			SUM(a.vacancy_area) AS vacancyArea,
+			b.street_name AS streetName
+		FROM
+			building_floors AS a
+		LEFT JOIN building AS b ON a.building_id = b.id
+		GROUP BY
+			b.street_name
+    </select>-->
+
+    <select id="showBuildingArea" resultType="com.yanlei.model.shehui.BuildingArea">
+        SELECT
+            b.street_name AS streetName,
+            SUM(a.in_area) AS liveArea,
+            SUM(a.total_area) AS totalArea
+        FROM
+            building AS b
+        LEFT JOIN building_in_analysis AS a ON b.id = a.industrial_park_id
+        GROUP BY
+            streetName
+    </select>
+</mapper>

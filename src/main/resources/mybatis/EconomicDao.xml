@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanlei.dao.showData.EconomicDao">
+
+    <select id="findElevenName" parameterType="java.lang.String" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+        id,
+        `name`,
+        int_value AS intValue,
+        double_value AS doubleValue,
+        max(acquisition_time) AS acquisitionTime,
+        cycle,
+        unit,
+        level,
+        level2,
+        level3,
+        source
+        FROM
+        government_economic
+        WHERE
+        `name` = #{0}
+    </select>
+
+    <select id="findLevel3" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT
+        level3
+        FROM
+        government_economic
+        WHERE
+        level2 = #{0}
+        GROUP BY
+        level3
+    </select>
+
+
+    <select id="findLeft" parameterType="java.lang.String" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+        id,
+        `name`,
+        int_value AS intValue,
+        double_value AS doubleValue,
+        acquisition_time AS acquisitionTime,
+        cycle,
+        unit,
+        level,
+        level2,
+        level3,
+        source
+        FROM
+        government_economic
+        WHERE
+        level3 = #{0}
+    </select>
+
+    <select id="findRight" parameterType="java.lang.String" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+        id,
+        `name`,
+        int_value AS intValue,
+        double_value AS doubleValue,
+        acquisition_time AS acquisitionTime,
+        cycle,
+        unit,
+        level,
+        level2,
+        level3,
+        source
+        FROM
+        government_economic
+        WHERE
+        level2 = #{0}
+    </select>
+
+    <select id="findEighteenName" parameterType="java.lang.String" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+            id,
+            `name`,
+            int_value AS intValue,
+            double_value AS doubleValue,
+            acquisition_time AS acquisitionTime,
+            cycle,
+            unit,
+            level,
+            level2,
+            level3,
+            source
+        FROM
+        government_economic
+        WHERE
+        level2 = #{0}
+    </select>
+
+    <select id="findFourRight" parameterType="java.lang.String" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+        id,
+        `name`,
+        int_value AS intValue,
+        double_value AS doubleValue,
+        acquisition_time AS acquisitionTime,
+        cycle,
+        unit,
+        level,
+        level2,
+        level3,
+        source
+        FROM
+        government_economic
+        WHERE
+        level3 = #{0}
+    </select>
+
+</mapper>

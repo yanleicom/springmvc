@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<link rel="stylesheet" href="/yanlei/css/page1/bootstrap.min.css" />
+	<link rel="stylesheet" href="/yanlei/css/page1/bootstrap-theme.min.css" />
+	<link rel="stylesheet" href="/yanlei/css/page1/style.min.css" />
+	<script type="text/javascript" src="/yanlei/js/page1/jquery-2.1.0.min.js"></script>
+	<script type="text/javascript" src="/yanlei/js/page1/Chart.min.js"></script>
+	<script type="text/javascript" src="/yanlei/js/page1/bootstrap.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+</head>
+<style>
+	ol {
+		list-style: none;
+	}
+	ul {
+		list-style: none;
+		position: absolute;
+		left: 0px;
+		top: 0px;
+	}
+
+	.box {
+		width: 800px;
+		height: 100%;
+		/*	        border: 3px solid #000;*/
+		position: relative;
+		margin: 50px auto;
+		overflow: hidden;
+	}
+	.box ul{height:100%;}
+	.box ul li {
+		float: left;
+		width: 800px;
+		height: 100%;
+	}
+
+	.box ol {
+		width: 800px;
+		position: absolute;
+		height: 50px;
+		left: 10%;
+		margin-left: -10px;
+		top: 80px;
+		/*        text-indent: 0px;*/
+	}
+
+	.box ol li {
+		width: 120px;
+		height: 50px;
+		border-radius: 30px;
+		background:#999;
+		float: left;
+		margin: 0 5px;
+		text-align: center;
+		display: inline-block;
+		font: 15px/50px '';
+		color: #fff;
+		cursor: pointer;
+	}
+
+	.box ol li.active {
+		background:#333;
+	}
+
+	#left,
+	#right {
+		position: absolute;
+		width: 20px;
+		height: 40px;
+		line-height: 40px;
+		text-align: center;
+		color: #fff;
+		background: rgba(0, 0, 0, 0.5);
+		text-decoration: none;
+		top: 50%;
+		margin-top: -20px;
+	}
+
+	#left {
+		left: 20px;
+	}
+
+	#right {
+		right: 20px;
+	}
+</style>
+<body>
+<div id="container">
+	<div class="session-1" style="">
+		<div class="session-1-top">
+			<div class="area-1" >
+			</div>
+			<div class="area-2">
+				<h3>2018年街道公文办理数据</h3>
+				<div id="street" style="" ></div>
+			</div>
+		</div>
+		<div id="graph" style=""></div>
+	</div>
+	<div class="session-2" >
+		<div class="box" id="box">
+			<ul>
+				<li>
+					<div id="main" style="display: inline-block;" class='table' >
+						11111
+					</div>
+				</li>
+				<li>
+					<div id="main2" style="display: inline-block;" class='table' >
+						222222222
+					</div>
+				</li>
+				<li>
+					<div id="main3" style="display: inline-block;" class='table'>
+						333
+					</div>
+				</li>
+				<li>
+					<div id="main4" style="display: inline-block;" class='table'>
+						444
+					</div>
+				</li>
+			</ul>
+			<ol>
+				<li class="active">总数</li>
+				<li>网站栏目公开数</li>
+				<li>信息公开数</li>
+			</ol>
+			<a href="javascript:;" id="left">&lt;</a>
+			<a href="javascript:;" id="right">&gt;</a>
+		</div>
+	</div>
+</div>
+<script>
+    //表格
+    $.ajax({
+        method: 'get',
+        url: '/yanlei/showPageGongWenTwo',
+        success: function(result){
+            var oBox=document.getElementsByClassName('area-1')[0];
+            var topSections=[];
+            var topValues=[];
+            var underSections=[];
+            var underValues=[];
+            var arr=['ning','li','zhao','qian','sun']
+            if (result) {
+                for(var i=0;i<result[0].length;i++){
+                    topSections.push(result[0][i].name);
+                    topValues.push(result[0][i].intValue);
+                    underSections.push(result[1][i].name);
+                    underValues.push(result[1][i].intValue);
+                }
+            }
+
+            console.log(underValues);
+            var str="<h3>各部门公文办理数前5名</h3>"
+            str+='<table class="form" border="1">';
+            str+='<tr class="header">';
+            str+='<td>排名</td>';
+            str+='<td>部门</td>';
+            str+='<td>公文处理数</td>';
+            str+='</tr>';
+
+            for(var j=0;j<topSections.length;j++){//循环行
+                str+='<tr>';
+                str+='<td>'+[j+1]+'</td>';
+                str+='<td>'+topSections[j]+'</td>';
+                str+='<td>'+topValues[j]+'</td>';
+                str+='</tr>';
+            }
+            str+='</table>';
+            oBox.innerHTML=str;
+            var str2="<h3>各部门公文办理数后5名</h3>"
+            str2+='<table class="form form2" border="1">';
+            str2+='<tr class="header">';
+            str2+='<td>排名</td>';
+            str2+='<td>部门</td>';
+            str2+='<td>公文办理数</td>';
+            str2+='</tr>';
+
+            for(var j=0;j<topSections.length;j++){//循环行
+                str2+='<tr>';
+                str2+='<td>'+[j+1]+'</td>';
+                str2+='<td>'+underSections[j]+'</td>';
+                str2+='<td>'+underValues[j]+'</td>';
+                str2+='</tr>';
+            }
+            str2+='</table>';
+            oBox.innerHTML+=str2;
+        },
+//	           error: function(XMLHttpRequest, textStatus, errorThrown) {
+//	               alert("查询失败");
+//	           }
+    })
+</script>
+<script type="text/javascript">
+    //     <!--八个街道饼图-->
+    // 基于准备好的dom，初始化echarts实例
+    var myChart31 = echarts.init(document.getElementById('street'));
+    // 指定图表的配置项和数据
+    var option = {
+        tooltip: {
+            trigger: 'item',
+        },
+        legend: [
+            {
+                x:'center',
+                data:[],
+            },
+            {
+                x:'center',
+                top:'3%',
+                data:[]
+            }
+        ],
+        series: [
+            {
+                name:'公文办理数',
+                type:'pie',
+                selectedMode: 'single',
+                radius: [0, '30%'],
+
+                label: {
+                    normal: {
+                        position: 'inner'
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data:[]
+            },
+            {
+                name:'公文办理数',
+                type:'pie',
+                radius: ['40%', '55%'],
+                label: {
+                    normal: {
+                        formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}    ',
+                        backgroundColor: '#eee',
+                        borderColor: '#aaa',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        rich: {
+                            a: {
+                                color: '#999',
+                                lineHeight: 22,
+                                align: 'center'
+                            },
+                            hr: {
+                                borderColor: '#aaa',
+                                width: '100%',
+                                borderWidth: 0.5,
+                                height: 0
+                            },
+                            b: {
+                                fontSize: 16,
+                                lineHeight: 33
+                            },
+                            per: {
+                                color: '#eee',
+                                backgroundColor: '#334455',
+                                padding: [2, 4],
+                                borderRadius: 2
+                            }
+                        }
+                    }
+                },
+                data:[
+                ]
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart31.setOption(option);
+    //八个街道动态获取数据
+    $.ajax({
+        method: 'get',
+        url: '/yanlei/showPageGongWen',
+        success: function(result){
+            var names1 = [];
+            var names2 = [];
+            var names = [];
+            var sections= [];
+            var sections2= [];
+            if (result) {
+                for(var i=0;i<result.length;i++){
+                    names.push(result[i].name);
+                    if(i==2||i==3||i==5||i==6){
+                        sections2.push({
+                            value: result[i].intValue,
+                            name: names[i]
+                        });
+                    }
+                    else(
+                        sections.push({
+                            value: result[i].intValue,
+                            name: names[i]
+                        })
+                    )
+                }
+            }
+            for(var i=0;i<names.length;i++){
+                if(i==0||i==1||i==2||i==3){
+                    names1.push(result[i].name)
+                }else{
+                    names2.push(result[i].name)
+                };
+            }
+            myChart31.setOption({ //加载数据图表
+                legend: [
+                    {
+                        x:'center',
+                        data:names1
+                    },
+                    {
+                        x:'center',
+                        top:'5%',
+                        data:names2
+                    }
+                ],
+                series: [
+                    {
+                        data: sections2
+                    },
+                    {
+                        data: sections
+                    }
+                ]
+            });
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("查询失败");
+        }
+    })
+</script>
+<script type="text/javascript">
+    //折线图
+    // 基于准备好的dom，初始化echarts实例
+    var myChart41 = echarts.init(document.getElementById('graph'));
+    // 指定图表的配置项和数据
+    option = {
+        title: {
+            text: '2018年每月公文处理数',
+            left:'center',
+            textStyle:{
+                //文字颜色
+                color:'#000',
+                //字体风格,'normal','italic','oblique'
+                fontStyle:'normal',
+                //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
+                fontWeight:'bold',
+                //		        //字体系列
+                fontFamily:'sans-serif',
+                //		        //字体大小
+                fontSize:25
+            }
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        xAxis: {
+            type: 'category',
+            data: [],
+//		        axisLabel :{ interval:0 }
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [],
+            type: 'line'
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart41.setOption(option);
+    //折线图动态获取数据
+    $.ajax({
+        method: 'get',
+        url: '/yanlei/showPageMonthSum',
+        success: function(result){
+            var cycles = [];
+            var values= [];
+            if (result) {
+                for(var i=0;i<result.各月份公文数.length;i++){
+                    cycles.push(result.各月份公文数[i].cycle);
+                    values.push(result.各月份公文数[i].intValue);
+                }
+            }
+
+            myChart41.setOption({ //加载数据图表
+                xAxis: {
+                    data: cycles
+//                          selected: selected3
+                },
+                series: [
+                    {
+                        // 根据名字对应到相应的系列
+//	                            name: ['部门'],
+                        data:values
+                    }
+//			                {
+//		                     // 根据名字对应到相应的系列
+//				                name: ['累计完成'],
+//				                data: add
+//			                 },
+                ]
+            });
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("查询失败");
+        }
+
+    })
+</script>
+<script>
+    //定时轮播
+    function getstyle(obj,attr){
+        if(obj.currentStyle){
+            return obj.currentStyle[attr];
+        }else{
+            return getComputedStyle(obj)[attr];
+        }
+    }
+    function move(obj,json,fn){
+        clearInterval(obj.timer);
+        obj.timer=setInterval(function(){
+            var bstop=true;//假设所有的属性都到目标点了。
+            for(var attr in json){
+                //求当前值
+                var current=null;
+                if(attr=='opacity'){
+                    current=Math.round(getstyle(obj,attr)*100);
+                }else{
+                    current=parseInt(getstyle(obj,attr));
+                }
+                //判断速度
+                var speed=(json[attr]-current)/5;
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                //判断定时器停止和输出
+                if(current!=json[attr]){//当前值不等于目标，继续运动。
+                    if(attr=='opacity'){
+                        obj.style[attr]=(current+speed)/100;
+                        obj.style.filter='alpha(opacity='+(current+speed)+')';
+                    }else{
+                        obj.style[attr]=current+speed+'px';
+                    }
+                    bstop=false;
+                }
+            }
+            if(bstop){
+                clearInterval(obj.timer);
+                fn&&fn();
+            }
+
+        },5)
+    }
+    //获取元素
+    var oBox=document.getElementById('box');
+    var oUl=oBox.getElementsByTagName('ul')[0];
+    var aBtns=oBox.getElementsByTagName('ol')[0].getElementsByTagName('li');
+    var oLeft=document.getElementById('left');
+    var oRight=document.getElementById('right');
+    //克隆改变布局
+    var first=oUl.children[0].cloneNode(true);//对第一个li元素克隆一份。
+    var last=oUl.children[oUl.children.length-1].cloneNode(true);//克隆最后一个li元素
+    oUl.insertBefore(last,oUl.children[0]);//追加
+    oUl.appendChild(first);
+    //设置尺寸
+    var liWidth=oUl.children[0].offsetWidth;//1个li尺寸
+    oUl.style.width=oUl.children.length*liWidth+'px';
+    oUl.style.left=-liWidth+'px';//让第一张图片移动出去
+    var num=0;
+    var bstop=true;//继续下一个点击。
+    var timer=null;//定时器的返回值
+    //显示隐藏箭头
+    oBox.onmouseover=function(){
+        oLeft.style.opacity=1;
+        oRight.style.opacity=1;
+        clearInterval(timer);
+    }
+    oBox.onmouseout=function(){
+        oLeft.style.opacity=0;
+        oRight.style.opacity=0;
+        timer=setInterval(function(){
+            oRight.onclick();
+        },5000);
+    }
+    //实现按钮点击，图片切换的效果。
+    for(var i=0;i<aBtns.length;i++){
+        aBtns[i].index=i;
+        aBtns[i].onclick=function(){
+            num=this.index;
+            tab();
+            aBtns[num].className='active';
+        }
+    }
+    function tab(){
+        for(var i=0;i<aBtns.length;i++){
+            aBtns[i].className='';
+        }
+        move(oUl,{left:-liWidth*(num+1)},function(){//判断条件必须等到运动完成，才会触发。
+            if(oUl.offsetLeft==-liWidth*(aBtns.length+1)){//打掩护的最后一张（第一张）
+                oUl.style.left=-liWidth+'px';
+                num=0;//初始值的num值
+            }
+            if(oUl.offsetLeft==0){
+                oUl.style.left=-liWidth*aBtns.length+'px';
+                num=aBtns.length-1;
+            }
+            bstop=true;//运动已经完成了
+        });
+    }
+    //箭头点击
+    oRight.onclick=function(){
+        if(bstop){
+            bstop=false;
+            num++;
+            tab();
+            if(num==aBtns.length){
+                aBtns[0].className='active';
+            }else{
+                aBtns[num].className='active';
+            }
+        }
+    }
+
+    oLeft.onclick=function(){
+        if(bstop){
+            bstop=false;
+            num--;
+            tab();
+            if(num==-1){
+                aBtns[aBtns.length-1].className='active'
+            }else{
+                aBtns[num].className='active';
+            }
+        }
+    }
+    timer=setInterval(function(){
+        oRight.onclick();
+    },4000);
+</script>
+
+<script>
+
+    //饼图1动态获取数据
+
+    // 指定图表的配置项和数据
+    var data = genData(10);
+    var legendData=data.legendData;
+    var legendData=legendData
+    var seriesData=data.seriesData;
+    var selected=data.selected;
+    option = {
+        title : {
+            text: '2018年第一季度政务公开统计',
+            subtext: '总数',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            //      formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            type: 'scroll',
+            orient: 'vertical',
+            right: 10,
+            top: 20,
+            bottom: 20,
+            data: [],
+            selected: selected
+        },
+        series : [
+            {
+                name: '总数',
+                type: 'pie',
+                radius : '55%',
+                center: ['40%', '50%'],
+                data: [],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    function genData(count) {
+        var legendData = [];
+        var seriesData = [];
+        var selected = {};
+        return {
+            legendData: legendData,
+            seriesData: seriesData,
+            selected: {}
+        };
+    }
+    // 基于准备好的dom，初始化echarts实例
+    var myChart1 = echarts.init(document.getElementById('main'));
+    // 使用刚指定的配置项和数据显示图表。
+    myChart1.setOption(option);
+    //饼图动态赋值
+    $.ajax({
+        method: 'get',
+        url: '/yanlei/showPageOne',
+        success: function(result){
+            var legendData1 = [];
+            var seriesData2 = [];
+            var selected3 ={};
+            if (result) {
+                for(var i=0;i<result.value[1].length;i++){
+                    legendData1.push(result.value[1][i].level2);
+                    seriesData2.push({
+                        name: legendData1[i],
+                        value: Math.round(result.value[1][i].intValue)
+                    });
+                    if(i>9){//legend部门名称显示数量
+                        selected3[legendData1[i]] = false
+                    };
+                }
+            }
+            myChart1.setOption({ //加载数据图表
+                legend: {
+                    data: legendData1 ,
+                    selected: selected3
+                },
+                series: [
+                    {
+                        // 根据名字对应到相应的系列
+//	                            name: ['部门'],
+                        data: seriesData2
+                    },
+//			                {
+//		                     // 根据名字对应到相应的系列
+//				                name: ['累计完成'],
+//				                data: add
+//			                 },
+                ]
+            });
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("查询失败");
+        }
+    })
+    //饼图2切换
+
+    // 指定图表的配置项和数据
+    var data22 = genData22(10);
+    var legendData22=data22.legendData22;
+    var legendData22=legendData22;
+    var seriesData22=data22.seriesData22;
+    var selected22=data22.selected22;
+    option = {
+        title : {
+            text: '2018年第一季度政务公开统计',
+            subtext: '网站栏目公开数',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            //      formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            type: 'scroll',
+            orient: 'vertical',
+            right: 10,
+            top: 20,
+            bottom: 20,
+            data: [],
+            selected: selected22
+        },
+        series : [
+            {
+                name: '总数',
+                type: 'pie',
+                radius : '55%',
+                center: ['40%', '50%'],
+                data: [],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    function genData22(count) {
+        var legendData22 = [];
+        var seriesData22 = [];
+        var selected22 = {};
+        return {
+            legendData22: legendData22,
+            seriesData22: seriesData22,
+            selected22: {}
+        };
+    }
+    // 基于准备好的dom，初始化echarts实例
+    var myChart2 = echarts.init(document.getElementById('main2'));
+    // 使用刚指定的配置项和数据显示图表。
+    myChart2.setOption(option);
+    //饼图动态赋值
+    $.ajax({
+        method: 'get',
+        url: '/yanlei/showPageOne',
+        success: function(result){
+            var legendData22 = [];
+            var seriesData22 = [];
+            var selected22 ={};
+            if (result) {
+                for(var i=0;i<result.value[2].length;i++){
+                    legendData22.push(result.value[2][i].level2);
+                    seriesData22.push({
+                        name: legendData22[i],
+                        value: Math.round(result.value[2][i].intValue)
+                    });
+                    if(i>9){//legend部门名称显示数量
+                        selected22[legendData22[i]] = false
+                    };
+                }
+            }
+            myChart2.setOption({ //加载数据图表
+                legend: {
+                    data: legendData22 ,
+                    selected: selected22
+                },
+                series: [
+                    {
+                        // 根据名字对应到相应的系列
+                        name: ['网站栏目公开数'],
+                        data: seriesData22
+                    },
+//			                {
+//		                     // 根据名字对应到相应的系列
+//				                name: ['累计完成'],
+//				                data: add
+//			                 },
+                ]
+            });
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("查询失败");
+        }
+    })
+
+
+    //饼图3切换
+
+    // 指定图表的配置项和数据
+    var data33 = genData33(10);
+    var legendData33=data33.legendData33;
+    var legendData33=legendData33
+    var seriesData33=data33.seriesData33;
+    var selected33=data33.selected33;
+    option = {
+        title : {
+            text: '2018年第一季度政务公开统计',
+            subtext: '信息中心数',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            //      formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            type: 'scroll',
+            orient: 'vertical',
+            right: 10,
+            top: 20,
+            bottom: 20,
+            data: [],
+            selected: selected33
+        },
+        series : [
+            {
+                name: '部门',
+                type: 'pie',
+                radius : '55%',
+                center: ['40%', '50%'],
+                data: [],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    function genData33(count) {
+        var legendData33 = [];
+        var seriesData33 = [];
+        var selected333 = {};
+        return {
+            legendData33: legendData33,
+            seriesData33: seriesData33,
+            selected33: {}
+        };
+    }
+    // 基于准备好的dom，初始化echarts实例
+    var myChart3 = echarts.init(document.getElementById('main3'));
+    // 使用刚指定的配置项和数据显示图表。
+    myChart3.setOption(option);
+    //饼图动态赋值
+    $.ajax({
+        method: 'get',
+        url: '/yanlei/showPageOne',
+        success: function(result){
+            var legendData33 = [];
+            var seriesData33 = [];
+            var selected33 ={};
+            if (result) {
+                for(var i=0;i<result.value[0].length;i++){
+                    legendData33.push(result.value[0][i].level2);
+                    seriesData33.push({
+                        name: legendData33[i],
+                        value: Math.round(result.value[0][i].intValue)
+                    });
+                    if(i>9){//legend部门名称显示数量
+                        selected33[legendData33[i]] = false
+                    };
+                }
+            }
+            myChart3.setOption({ //加载数据图表
+                legend: {
+                    data: legendData33 ,
+                    selected: selected33
+                },
+                series: [
+                    {
+                        // 根据名字对应到相应的系列
+                        name: ['信息公开数'],
+                        data: seriesData33
+                    },
+//			                {
+//		                     // 根据名字对应到相应的系列
+//				                name: ['累计完成'],
+//				                data: add
+//			                 },
+                ]
+            });
+            window.onresize =function(){
+                myChart31.resize();
+                myChart41.resize();
+                myChart1.resize();
+                myChart2.resize();
+                myChart3.resize();
+//						myChart4.resize();
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("查询失败");
+        }
+    })
+</script>
+</body>
+
+</html>

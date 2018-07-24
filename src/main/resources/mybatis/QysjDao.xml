@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanlei.dao.QysjDao">
+
+    <delete id="delYearAll">
+        DELETE FROM qysj_year
+    </delete>
+    <delete id="delMonthAll">
+        DELETE FROM qysj_month
+    </delete>
+
+    <delete id="delDayAll">
+        DELETE FROM qysj_day
+    </delete>
+
+
+    <insert id="addQysjYearList" parameterType="java.util.List">
+        insert into qysj_year
+        (column1,column2,column3,updatetime)
+        values
+        <foreach collection="list" item="qysjYear" separator=",">
+            (#{qysjYear.column1},#{qysjYear.column2},#{qysjYear.column3},#{qysjYear.updatetime})
+        </foreach>
+    </insert>
+
+    <insert id="addQysjMonthList" parameterType="java.util.List">
+        insert into qysj_month
+        (column1,column2,column3,updatetime)
+        values
+        <foreach collection="list" item="qysjMonth" separator=",">
+            (#{qysjMonth.column1},#{qysjMonth.column2},#{qysjMonth.column3},#{qysjMonth.updatetime})
+        </foreach>
+    </insert>
+
+    <insert id="addQysjDayList" parameterType="java.util.List">
+        insert into qysj_day
+        (column1,column2,column3,updatetime)
+        values
+        <foreach collection="list" item="qysjDay" separator=",">
+            (#{qysjDay.column1},#{qysjDay.column2},#{qysjDay.column3},#{qysjDay.updatetime})
+        </foreach>
+    </insert>
+
+
+</mapper>

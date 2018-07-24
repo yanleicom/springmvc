@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="llz">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="../../js/xiacheng/jquery.min.js"></script>
+    <script src="../../js/xiacheng/echarts.min.js"></script>
+    <script src="../../js/xiacheng/layer.js"></script>
+    <script src="../../js/xiacheng/options.js"></script>
+    <title></title>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%; 
+        }
+        .main{
+            margin: 0 auto;
+            width: 1250px;
+        }
+        .main .wai{
+            width: 1250px;
+            height: 500px;
+        }
+        .wai li{
+            width: 600px;
+            height: 250px;
+            float: left;
+        }
+        ul,li{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .wai li img{
+            width: 600px;
+            height: 250px;
+        }
+        .top{
+            width: 1250px;
+            height: 538px;
+            background-color: transparent;
+            display: none;
+        }
+        .fixed:after{
+            display:block;
+            clear:both;
+            content:'';
+            visibility:hidden;
+            height:0
+            }
+        .fixed{
+            zoom:1
+        }
+        .double{
+            margin: 0 auto;
+            width: 1250px;
+            display: none
+        }
+        .shou{
+            float: left;
+            background-color: transparent;
+            padding-top: 10px;
+        }
+        .nei{
+            padding-top: 10px;
+            float: left;
+            background-color: transparent;
+            margin-left: 50px;
+        }
+        .side{
+            display: none
+        }
+        .out{
+            display: none;
+        }
+        .footer{
+            width: 1200px;
+            height: 30px;
+            position: relative;
+        }
+        .footer section{
+            width: 600px;
+            height: 30px;
+        }
+        .showclick{
+            margin-left: 30px;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .footer .more{
+            position: absolute;
+            top: 26px;
+            left: 80px;
+            display: none;
+        }
+        .footer .more.active{
+            display: block;
+        }
+        .lian{
+            position: absolute;
+            top: 0;
+            left: 500px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <ul class="wai">
+            <li class="d1">
+                <img src="../../img/xiacheng/1.png" alt="">
+            </li>
+            <li class="d2">
+                <img src="../../img/xiacheng/3.png" alt="">
+            </li>
+            <li class="d3">
+                <img src="../../img/xiacheng/2.png" alt="">
+            </li>
+            <li class="d4">
+                <img src="../../img/xiacheng/4.png" alt="">
+            </li>
+        </ul>
+        <div class="footer">
+            <section>数据来源：信息中心数据支撑平台<span class="showclick">更多来源...</span></section>
+            <ul class="more">
+                <li>统计局《数据下城》</li>
+                <li>政法委《基层综合治理四个平台》</li>
+                <li>财政局《安商联动平台》</li>
+                <li>经旅局《企业服务中心管理系统》</li>
+                <li>政府办《政务工作平台》</li>
+            </ul>
+            <a class="lian" href="http://172.16.9.61:8080/yanlei/admin.html">数据公告板</a>
+        </div>
+    </div>
+    <div class="top">
+        <div class="main" id="main" style="width: 900px;height:500px;"></div>
+    </div>
+    <div class="double fixed">
+        <div class="shou" id="shou" style="width: 600px;height:500px;"></div>
+        <div class="nei" id="nei" style="width: 600px;height:500px;"></div>
+    </div> 
+    <div class="side" id="side" style="width: 1250px;height:500px;"></div>
+    <div class="out" id="out" style="width: 1250px;height:500px;"></div>
+</body>
+</html>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    myChart.setOption(peioption);
+    var lineChart = echarts.init(document.getElementById('shou'));
+    lineChart.setOption(lineoption)
+    var neiChart = echarts.init(document.getElementById('nei'));
+    neiChart.setOption(neioption)
+    var zhiChart = echarts.init(document.getElementById('out'));
+    zhiChart.setOption(zhioption)
+    var barChart = echarts.init(document.getElementById('side'));
+    barChart.setOption(baroption)
+    $('.d1').click(function (){
+        layer.open({
+            type: 1,
+            closeBtn: 1, //不显示关闭按钮
+            anim: 2,
+            shadeClose: true, //开启遮罩关闭
+            area: ['1300px', '600px'],
+            content: $('.top')
+        });
+    })
+    $('.d2').click(function (){
+        layer.open({
+            type: 1,
+            closeBtn: 1, //不显示关闭按钮
+            anim: 2,
+            shadeClose: true, //开启遮罩关闭
+            area: ['1300px', '600px'],
+            content: $('.double')
+        });
+    })
+    $('.d3').click(function (){
+        layer.open({
+            type: 1,
+            closeBtn: 1, //不显示关闭按钮
+            anim: 2,
+            shadeClose: true, //开启遮罩关闭
+            area: ['1300px', '600px'],
+            content: $('.side')
+        });
+    })
+    $('.d4').click(function (){
+        layer.open({
+            type: 1,
+            closeBtn: 1, //不显示关闭按钮
+            anim: 2,
+            shadeClose: true, //开启遮罩关闭
+            area: ['1300px', '600px'],
+            content: $('.out')
+        });
+    })
+    $('.showclick').click(function(){
+        $('.more').toggleClass('active')
+    })
+</script>

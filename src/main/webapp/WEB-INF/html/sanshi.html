@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Llz">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/yanlei/css/base.css">
+    <link rel="stylesheet" href="/yanlei/css/sanshi.css">
+    <script src="/yanlei/js/jquery.min.js"></script>
+    <script src="/yanlei/js/template.js"></script>
+    <script src="/yanlei/js/progress.js"></script>
+    <script src="/yanlei/js/echarts.min.js"></script>
+    <script src="/yanlei/js/chart.js"></script>
+    <script src="/yanlei/js/hangzhou.js"></script>
+    <title>监控大屏</title>
+    <style>
+        .box{
+            width: 250px;
+            height:150px;
+            /*border: 1px solid red;*/
+            float: left;
+            font-size:14px;
+            text-align: justify;
+            position: relative;
+            overflow: hidden;
+
+        }
+        .big{
+            width: 10px;
+            height:150px;
+            /*border: 1px solid red;*/
+            float: left;
+            margin-left: 20px;
+            position: relative;
+            border-radius: 5px;
+            background-color: #0d3e75;
+        }
+        .small{
+            width: 10px;
+            height: 20px;
+            background:#00b8ea;
+            position: absolute;
+            border-radius: 5px;
+            cursor:pointer ;
+        }
+        .p{
+            position: absolute;
+            left:0;
+            top:0px;
+            /*padding: 10px;*/
+
+        }
+    </style>
+</head>
+<body>
+<main>
+    <header>
+        <h2>数据公告板</h2>
+        <div class="head_top">社会</div>
+    </header>
+    <div class="jk_content fixed">
+        <div class="jk_con_left" id="jk_con_left">
+            <div class="con_left_pei" id="con_left_pei"></div>
+        </div>
+        <div class="jk_con_cen" id="jk_con_cen" style="height: 560px; width:480px;"></div>
+        <div class="jk_con_right" id="jk_con_right"></div>
+    </div>
+    <footer></footer>
+</main>
+</body>
+</html>
+<script type="text/html" id="dest">
+    <h3>{{lists1}}</h3>
+    <div class="wrapper">
+        <ul class='con_left_nav fixed'>
+            {{each lists as value i}}
+            {{if i==0}}
+            <li title={{value}} class='active'>{{value}}</li>
+            {{else}}
+            <li title={{value}}>{{value}}</li>
+            {{/if}}
+            {{/each}}
+        </ul>
+    </div>
+    <div class='con_left_wai' id='con_left_wai'>
+        {{each dlists as bu}}
+        <div class='con_left_waishow flow'>
+            <div class='box'>
+                <div class='p'>
+                    {{each bu.fenlist as list}}
+                    <div class='con_left_li fixed' >
+                        <div title={{list.name}} class='con_left_liF'>{{list.name}}</div>
+                        <div class='prg con_left_liS' w={{list.percent}}></div>
+                        <div title={{list.num}} class='con_left_liT'>{{list.num}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="big">
+                <div class="small"></div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</script>
+<script type="text/html" id="test">
+    <h3>{{lists1[1]}}</h3>
+    <div class="wrapper">
+        <ul class='con_right_nav fixed'>
+            {{each lists as value i}}
+            {{if i==0}}
+            <li title={{value}} class='active'>{{value}}</li>
+            {{else}}
+            <li title={{value}}>{{value}}</li>
+            {{/if}}
+            {{/each}}
+        </ul>
+    </div>
+    <div class='con_right_wai' id='con_right_wai'>
+        {{each dlists as bu}}
+        <div class='con_right_waishow'>
+            {{each bu.fenlist as room}}
+            <div class='con_right_li fixed'>
+                <div title={{room.name}} class='con_right_liF'>{{room.name}}</div>
+                <div class='prg con_right_liS' w={{room.percent}}></div>
+                <div title={{room.num}} class='con_right_liT'>{{room.num}}</div>
+            </div>
+            {{/each}}
+        </div>
+        {{/each}}
+    </div>
+</script>
+<script>
+
+
+    $(function (){
+        $.ajax({
+            type:'GET',
+            async:false,
+            url:"/yanlei/showPeople",
+            dataType:'JSON',
+            success:function(data){
+//        var oBox=document.getElementsByClassName('box')[0];
+//			var oBox=$('.box');
+//			console.log(oBox.className);
+
+//          $('.box').css('height','200px');
+                console.log(data)
+                var html = template('dest', data);
+                $('#jk_con_left').prepend(html)
+                let len=data.lists.length
+                let widthd=70*len-10
+                $('.con_left_nav').css('width',widthd)
+
+                var oBox=document.querySelector('.box');
+                console.log(oBox.className)
+                var oBig=document.querySelector('.big');
+                console.log(oBig.className)
+                var oSmall=document.querySelector('.small');
+                console.log(oSmall.className)
+                var oP=document.querySelector('.p');
+                console.log(oP.className);
+                var y=0;
+                oSmall.onmousedown=function(ev){
+                    var ev=ev||window.event;
+                    y=ev.clientY-oSmall.offsetTop;//shorty最短距离
+
+                    document.onmousemove=function(ev){
+                        var ev=ev||window.event;
+                        var t=ev.clientY-y;
+                        console.log(ev.clientY);
+                        if(t<0){
+                            t=0;
+                        }else if(t>oBig.offsetHeight-oSmall.offsetHeight-2){
+                            t=oBig.offsetHeight-oSmall.offsetHeight-2;
+                        }
+                        //缩放比例
+                        var scale=t/(oBig.offsetHeight-oSmall.offsetHeight-2);
+
+
+
+                        oP.style.top=-scale*(oP.offsetHeight-oBox.offsetHeight)+'px';
+                        oSmall.style.top=t+'px';
+
+                    }
+                    document.onmouseup=function(){
+                        document.onmousemove=null;
+                        document.onmouseup=null;
+                    }
+                    return false;
+                }
+
+
+
+                var nanchart = echarts.init(document.getElementById('con_left_pei'));
+                nanoption.series[0].data=data.colnums[0].fenData
+                nanchart.setOption(nanoption)
+                $.each($('.con_left_nav li'),function(index,el){
+                    $(this).click(function(){
+                        $(this).addClass('active').siblings().removeClass('active')
+                        $('#con_left_wai .con_left_waishow').eq(index).show().siblings().hide()
+                        var nanchart = echarts.init(document.getElementById('con_left_pei'));
+                        nanoption.series[0].data=data.colnums[index].fenData
+                        nanchart.setOption(nanoption)
+
+                    })
+                })
+            },
+            error:function(data){
+                alert('error')
+            }
+        })
+        $.ajax({
+            type: "GET",
+            url: "/yanlei/showHavePeople",
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                var thtml = template('test', data);
+                $('#jk_con_right').html(thtml)
+                Progress()
+                let len=data.lists.length
+                let widthd=70*len-10
+                $('.con_right_nav').css('width',widthd)
+                $.each($('.con_right_nav li'),function(index,el){
+                    $(this).click(function(){
+                        $(this).addClass('active').siblings().removeClass('active')
+                        $('#con_right_wai .con_right_waishow').eq(index).show().siblings().hide()
+                    })
+                })
+            }
+        });
+    })
+
+
+</script>
+<script>
+    echarts.registerMap('xiacheng', hangzhouJson);
+    var mapchart = echarts.init(document.getElementById('jk_con_cen'));
+    mapchart.setOption(mapoption)
+
+    template.helper('number',function(value){
+        if(value>10000){
+            return (value/10000).toFixed(2)+'万'
+        }else{
+            return value
+        }
+    })
+    var oBox=document.getElementsByClassName('box')[0];
+    //			var oBox=$('.con_left_wai')
+    console.log(oBox);
+</script>

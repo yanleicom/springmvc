@@ -1,0 +1,41 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0;padding:0;}
+a{text-decoration:none;}
+li{list-style:none;}
+
+/*文本溢出 出现省略号*/
+.over{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+/*垂直对齐方式*/
+.valign{display:inline-block;width:0;height:100%;vertical-align:middle;}
+.margin{width:1600px;margin:0 auto;}
+body{background-color: #fff;}
+#main{overflow: hidden;background-color: #fff;padding-top:100px;zoom:1;}
+#main .left{float:left;padding-left:56px;background-color: #fff;width:450px;}
+#main .left h6{font:700 18px/62px "微软雅黑";color:#333;}
+#main .left .title{display: inline-block;text-indent:0px;vertical-align: middle;width:450px;margin-top:10px;}
+#main .left .title li{float: left;font:700 8px/22px "微软雅黑";color:#333;width:60px;text-align: center;height:22px;margin-right:10px;background-color: #ebfbce;cursor: pointer;}
+#main .left .title li.active{background:#99cc66;}
+#main .left .table{display:none;margin-top:10px;}
+#main .left .table .population{height:200px;}
+#main .left h4{font:700 8px/22px "微软雅黑";color:#333;width:60px;text-align: center;height:22px;margin-right:10px;background-color: #ebfbce;}
+#main .left .table .population ul{display:block;overflow: hidden;height:22px;border-radius: 2px ;}
+#main .left .table .population ul li{float: left;font: 8px/22px "微软雅黑";color:#333;width:150px;text-align: center;height:22px;}
+#main .left .table  ul.first{overflow: hidden;background-color: #3896d3;height:30px;border-radius: 2px ;}
+#main .left .table  ul.first li{float: left;font: 8px/30px "微软雅黑";color:#fff;width:148px;text-align: center;height:30px;}
+#main .left .table  ul.first li span{display:inline-block;width:1px;height:10px;background-color:#fff;margin:11px 0px;float: right;}
+#main .left .table  ul.one{background-color:#f2fddf ;margin-top:2px;}
+#main .left .table  ul.two{background-color:#f6f3f7 ;margin-top:2px;}
+#main .left .ke{margin:20px 0;}
+
+#main .center {float:left;width:400px;margin:0 auto;font:18px/70px '';color:#000;text-align: center;}
+/*#main .center .tu{display:inline-block;width:400px;height:540px;background:url(../images/tu.gif);background-size:100% 100%;margin:0 15px 0 30px;}*/
+#main .center .tu{display:inline-block;width:400px;height:540px;margin:0 15px 0 30px;}
+#main .center .tu img{display:inline-block;width:400px;height:540px;}
+#main .right{float:right;}
+#main .right h3{font:700 18px/70px '';color:#000;border-bottom: 1px solid #999;text-indent: 10px;}
+
+#main .right p{display:inline-block;font:700 20px/40px '';color:#fff;border:1px solid #ddd;background-color: #6893bb;text-indent: 6px;margin:20px 20px 94px 20px;width:172px;}
+#main .right p.te{background-color: #d9a73c;}
+#main .right p i{display:block;text-indent: 50px;font:700 20px/40px;}

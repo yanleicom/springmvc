@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Llz">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/yanlei/css/base.css">
+    <link rel="stylesheet" href="/yanlei/css/sanshi1.css">
+    <script src="/yanlei/js/jquery.min.js"></script>
+    <script src="/yanlei/js/template.js"></script>
+    <script src="/yanlei/js/progress.js"></script>
+    <script src="/yanlei/js/echarts.min.js"></script>
+    <script src="/yanlei/js/chart.js"></script>
+    <title>监控大屏</title>
+</head>
+<body>
+    <main>
+        <header>
+            <h2>数据公告板</h2>
+            <div class="head_top">社会</div>
+        </header>
+        <div class="jk_content fixed">
+            <div class="jk_con_left" id="jk_con_left"></div>
+            <div class="jk_con_cen" id="jk_con_cen">
+                <div class="once_top">
+                    <h3>开通网上办事事项总数</h3>
+                    <section>7234234</section>
+                </div>
+                <div class="once_btm" id="once_btm"></div>
+            </div>
+            <div class="jk_con_right" id="jk_con_right"></div>
+        </div>
+        <footer></footer>
+    </main>
+</body>
+</html>
+<script type="text/html" id="test">
+    <h3>{{name}}</h3>
+    <ul class='once_right_nav fixed'>
+        {{each lists as value i}}
+            {{if i==0}}
+            <li title={{value}} class='active'>{{value}}</li>
+            {{else}}
+            <li title={{value}}>{{value}}</li>
+            {{/if}}
+        {{/each}}
+    </ul>
+    <div class='con_right_wai' id='con_right_wai'>
+        {{each dlists as bu}}
+            <div class='con_right_waishow'>
+                {{each bu.fenlist as list}}
+                    <div class='con_right_li fixed'>
+                        <div title={{list.name}} class='con_right_liF'>{{list.name}}</div>
+                        <div class='prg con_right_liS' w={{list.percent}}></div>
+                        <div title={{list.num}} class='con_right_liT'>{{list.num}}</div>
+                    </div>
+                {{/each}}
+            </div>
+        {{/each}}
+    </div>
+</script>
+<script type="text/html" id="dest">
+    <h3>{{column1}}</h3>
+    <div class="wrapper">
+        <ul class='jk_right_nav fixed'>
+            {{each lists as value i}}
+               {{if i==0}}
+                <li title={{value}} class='active'>{{value}}</li>
+               {{else}}
+               <li title=value>{{value}}</li>
+               {{/if}}
+            {{/each}}
+        </ul>
+    </div>
+    <div class='jk_table_wai' id='jk_table_wai'>
+        {{each dlists as bu}}
+            <table>
+                <tr>
+                    <th>{{column2}}</th>
+                    <th>{{column3}}</th>
+                    <th>{{column4}}</th>
+                </tr>
+                {{each bu.fenlist as list i}}
+                    <tr>
+                       <td>{{i+1}}</td>
+                       <td>{{list.bumen}}</td>
+                       <td>{{list.num}}</td>
+                    </tr>
+                 {{/each}}
+            </table>
+        {{/each}}
+    </div>
+</script> 
+<script>
+    $(function (){
+        $.ajax({
+            type: "get",
+            url: '/yanlei/showZdpyc',
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                var thtml = template('test', data); 
+                $('#jk_con_left').html(thtml)
+                Progress()
+                $.each($('.once_right_nav li'),function(index,el){
+                    $(this).click(function(){
+                        $(this).addClass('active').siblings().removeClass('active')
+                        $('#con_right_wai .con_right_waishow').eq(index).show().siblings().hide()
+                    })
+                })
+            },
+            error:function(){
+                console.log('error')
+            }
+        });
+        $.ajax({
+            type: "get",
+            url: "/yanlei/showDepartmentOfNumber",
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                var html = template('dest', data); 
+                $('#jk_con_right').html(html)
+                let len=data.lists.length
+                let widthd=70*len-10
+                $('.con_left_nav').css('width',widthd)
+                $.each($('.jk_right_nav li'),function(index,el){
+                    $(this).click(function(){
+                        $(this).addClass('active').siblings().removeClass('active')
+                        $('#jk_table_wai table').eq(index).show().siblings().hide()
+                    })
+                })
+            },
+            error:function(){
+                console.log('error')
+            }
+        });
+        $.ajax({
+            type: "get",
+            url: "/yanlei/showComputer",
+            dataType: "json",
+            success: function (data) {
+                $('.once_top h3').html(data.column5)
+                $('.once_top section').html(data.column6)
+                console.log(data)
+                var peiChart = echarts.init(document.getElementById('once_btm'));
+                peioption.series[0].data=data.fenlist5s
+                peiChart.setOption(peioption);
+            },
+            error:function(){
+                console.log('error')
+            }
+        });
+    })
+    var peiChart = echarts.init(document.getElementById('once_btm'));
+    peiChart.setOption(peioption);
+</script>

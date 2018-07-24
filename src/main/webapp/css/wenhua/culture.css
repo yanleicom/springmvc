@@ -1,0 +1,99 @@
+*{	
+	margin: 0px;
+	padding: 0px;
+	font-family: "微软雅黑",sans-serif;
+	list-style: none;
+}
+body {
+	background-color: #F6F3F7;
+}
+.title{
+	font-size: 20px;
+	line-height: 60px;
+	padding-left: 33px;
+	border-bottom: 1px solid #E5E5E5;
+}
+#session_top{
+	width: 100%;
+	overflow: hidden;
+}
+#session_top_left{
+	float: left;
+	display: inline-block;
+	margin: 10px;
+	width: 49%;
+	background-color: white;
+	
+}
+#session_top_right{
+	float: right;
+	display: inline-block;
+	
+	margin: 10px;
+	margin-left: 0px;
+	width: 49%;
+	background-color: white;	
+}
+#session_bottom{
+	width: 100%;
+	margin: 10px;
+	background-color: white;
+}
+#session_bottom span{
+	color: #666666;
+	display: inline-block;
+	margin-left: 40px;
+	font-weight: 400;
+}
+.img_poll{
+	width: 100%;
+	height: 500px;
+    background: url(/yanlei/img/wenhua/art_03.png) center no-repeat;
+    background-size: 70%;
+}
+.img_ul{
+	width: 70%;
+	height: 500px;
+	margin: 0 15%;
+}
+.img_ul li{
+	list-style: none;
+	width: 10%;
+	height: 500px;
+	float: left;
+	
+}
+#artical{
+	width: 800px;
+    height: auto;
+	background-color: rgba(0,0,0,0.8);
+	border-radius: 10px;
+	margin: 0 auto;
+	color: white;
+	line-height: 25px;
+	padding: 55px;
+	box-sizing: border-box;
+	font-size: 16px;
+	position: absolute;
+	left: 25%;
+	bottom: 8%;
+	display: none;
+	
+   
+	
+}
+.left{
+	display: inline-block;
+	margin-left: 60px;
+	
+}
+.right{
+	display: inline-block;
+	margin-left: 80px;
+}
+.li_1{
+	cursor:pointer;
+}
+.li_1:hover #artical{
+	background-color: red;
+}

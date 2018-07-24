@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="/yanlei/css/dangqun/index.css" />
+    <script type="text/javascript" src="/yanlei/js/dangqun/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="/yanlei/js/dangqun/index.js"></script>
+    <script type="text/javascript" src="/yanlei/js/dangqun/Marquee.js"></script>
+</head>
+<body>
+<div class="dangqun">
+    <div class="dangqun_contain">
+        <div class="dangqun_left">
+            <img class="map" src="/yanlei/img/dangqun/20180424192003.gif" />
+            <button class="mapBtn_1" onclick="btn1()">党群组织分布</button>
+            <button class="mapBtn_2"onclick="btn2()">党群活动分布</button>
+            <button class="mapBtn_3"onclick="btn3()">党群活动热力分布</button>
+        </div>
+        <div class="dangqun_right">
+
+
+            <div class="dangqun_right_top">
+                <h4 style="position: relative;top: 20px; background-color: white;padding-bottom: 20px;">&nbsp;&nbsp;&nbsp;街道党组织信息</h4>
+
+                <div class="dangqun_right_pic">
+                    <div class="lab">
+                        党员固定活动日活动
+                    </div>
+                    <div class="show">
+                        <img class="largePic"src="/yanlei/img/dangqun/2.png" />
+
+                    </div>
+                    <div class="line">
+                        <ul>
+                            <li class="li-1" onclick="img1()">
+                                <img src="/yanlei/img/dangqun/2.png" />
+                            </li><li class="li-1" onclick="img2()">
+                            <img src="/yanlei/img/dangqun/1.png" />
+                        </li>
+                            <li class="li-1" onclick="img3()">
+                                <img src="/yanlei/img/dangqun/4.png" />
+                            </li>
+                            <li class="li-1" onclick="img4()">
+                                <img src="/yanlei/img/dangqun/5.png" />
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="dangqun_right_text">
+                    <div class="des">
+                        <h3>最新动态<span style="font-size: 14px;font-weight: 400;">&nbsp;&nbsp;&nbsp;NEWS</span></h3>
+                    </div>
+                    <ul class="news">
+                        <li><span class="index">1</span> 1月份党员固定活动日活动</li>
+                        <li><span class="index">2</span> 2月份党员固定活动日活动</li>
+                        <li><span class="index">3</span> 3月份党员固定活动日活动</li>
+                        <li><span class="index">4</span> 4月份党员固定活动日活动</li>
+                       <!-- <li><span class="index">5</span> 5月份党员固定活动日活动</li>-->
+                       <!-- <li><span class="index">6</span> 6月份党员固定活动日活动</li>-->
+
+                    </ul>
+                </div>
+            </div>
+            <div class="dangqun_right_bottom">
+
+                <!--	<img style="position: relative; left: 10%;top: 50%; transform: scale(0.6);" src="img/back.png" /></a>                     <a href="javascript:void(0);" id="goR">	<img src="img/header.png"  style="position: relative; top: -20%; right: 0;transform: scale(0.6);" /></a>-->
+
+                <h4 style="position: relative;top: 20px; background-color: white;">&nbsp;&nbsp;&nbsp;优秀党员</h4>
+
+                <div id="marquee1">
+
+                    <ul>
+
+                        <li>
+                            <div class="person">
+                                <img class="touXiang" src="/yanlei/img/dangqun/p1.jpg"/>
+                                <div class="introduce">
+                                    <h4>李玲</h4>
+                                    <p >2016年浙江省优秀共产党员、优秀党务工作者、先进基层党组织表彰公示</p>
+                                </div>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="person">
+                                <img class="touXiang" src="/yanlei/img/dangqun/p2.jpg"/>
+                                <div class="introduce">
+                                    <h4>刘今昱</h4>
+                                    <p>2016年浙江省优秀共产党员、优秀党务工作者、先进基层党组织表彰公示</p>
+                                </div>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="person">
+                                <img class="touXiang" src="/yanlei/img/dangqun/p3.jpg"/>
+                                <div class="introduce">
+                                    <h4>黄飞华</h4>
+                                    <p>2016年浙江省优秀共产党员、优秀党务工作者、先进基层党组织表彰公示</p>
+                                </div>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="person">
+                                <img class="touXiang" src="/yanlei/img/dangqun/p4.jpg"/>
+                                <div class="introduce">
+                                    <h4>潘雪凤</h4>
+                                    <p>2016年浙江省优秀共产党员、优秀党务工作者、先进基层党组织表彰公示</p>
+                                </div>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="person">
+                                <img class="touXiang" src="/yanlei/img/dangqun/p1.jpg"/>
+                                <div class="introduce">
+                                    <h4>李玲</h4>
+                                    <p >2016年浙江省优秀共产党员、优秀党务工作者、先进基层党组织表彰公示</p>
+                                </div>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="person">
+                                <img class="touXiang" src="/yanlei/img/dangqun/p2.jpg"/>
+                                <div class="introduce">
+                                    <h4>刘今昱</h4>
+                                    <p>2016年浙江省优秀共产党员、优秀党务工作者、先进基层党组织表彰公示</p>
+                                </div>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="person">
+                                <img class="touXiang" src="/yanlei/img/dangqun/p3.jpg"/>
+                                <div class="introduce">
+                                    <h4>黄飞华</h4>
+                                    <p>2016年浙江省优秀共产党员、优秀党务工作者、先进基层党组织表彰公示</p>
+                                </div>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="person">
+                                <img class="touXiang" src="/yanlei/img/dangqun/p4.jpg"/>
+                                <div class="introduce">
+                                    <h4>潘雪凤</h4>
+                                    <p>2016年浙江省优秀共产党员、优秀党务工作者、先进基层党组织表彰公示</p>
+                                </div>
+                            </div>
+
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function() {
+        //一次横向滚动一个
+        $('#marquee1').kxbdSuperMarquee({
+            distance: 240,
+            time: 3,
+            btnGo: {
+                left: '#goL',
+                right: '#goR'
+            },
+            direction: 'left'
+        });
+
+    });
+</script>
+<!-- 代码部分end -->
+</body>
+</html>

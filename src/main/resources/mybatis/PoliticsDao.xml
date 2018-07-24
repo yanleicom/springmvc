@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanlei.dao.showData.PoliticsDao">
+
+    <select id="findOne" resultType="com.yanlei.model.GovernmentDepartment" parameterType="java.lang.String">
+       SELECT
+            id,
+            `name`,
+            int_value AS intValue,
+            double_value AS doubleValue,
+            MAX(acquisition_time) AS acquisitionTime,
+            unit,
+            level,
+            level2,
+            level3,
+            source
+        FROM
+            government_department
+        WHERE
+            `name` = #{0}
+    </select>
+
+    <select id="findLevel3" resultType="java.lang.String" parameterType="java.lang.String">
+             SELECT
+            level3
+        FROM
+            government_department
+        WHERE
+            level2 = #{0}
+        GROUP BY
+            level3
+    </select>
+
+    <select id="findRight" parameterType="java.lang.String" resultType="com.yanlei.model.GovernmentDepartment">
+       SELECT
+            id,
+            `name`,
+            int_value AS intValue,
+            double_value AS doubleValue,
+            acquisition_time AS acquisitionTime,
+            cycle,
+            unit,
+            level,
+            level2,
+            level3,
+            source
+        FROM
+            government_department
+        WHERE
+            level3 = #{0}
+    </select>
+
+    <select id="findRule" parameterType="java.lang.String" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+            id,
+            `name`,
+            int_value AS intValue,
+            double_value AS doubleValue,
+            acquisition_time AS acquisitionTime,
+            cycle,
+            unit,
+            level,
+            level2,
+            level3,
+            source
+        FROM
+            government_department
+        <where>
+           name = #{0}
+           AND  cycle LIKE concat('%',#{1},'%')
+        </where>
+
+    </select>
+
+    <select id="findRules" parameterType="java.lang.String" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+            id,
+            `name`,
+            sum(int_value) AS intValue,
+            double_value AS doubleValue,
+            cycle,
+            unit,
+            level,
+            level2,
+            level3,
+            source
+        FROM
+            government_department
+        WHERE
+            `name` = #{0}
+    </select>
+
+    <select id="findSum" parameterType="com.yanlei.model.GovernmentDepartment" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+            id,
+            `name`,
+            sum(int_value) AS intValue,
+            double_value AS doubleValue,
+            cycle,
+            unit,
+            level,
+            level2,
+            level3,
+            source
+            FROM
+            government_department
+        <where>
+            <if test="name != null and name != '' ">
+                and `name` = #{name}
+            </if>
+            <if test="acquisitionTime != null ">
+                and date(acquisition_time) <![CDATA[ <= ]]> date(#{acquisitionTime,jdbcType=TIMESTAMP})
+            </if>
+        </where>
+    </select>
+
+    <select id="findAvg" parameterType="com.yanlei.model.GovernmentDepartment" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+            id,
+            `name`,
+            avg(int_value) AS intValue,
+            double_value AS doubleValue,
+            cycle,
+            unit,
+            level,
+            level2,
+            level3,
+            source
+            FROM
+            government_department
+        <where>
+            <if test="name != null and name != '' ">
+                and `name` = #{name}
+            </if>
+            <if test="acquisitionTime != null ">
+                and date(acquisition_time) <![CDATA[ <= ]]> date(#{acquisitionTime,jdbcType=TIMESTAMP})
+            </if>
+        </where>
+    </select>
+
+
+    <select id="findMonthSum"  parameterType="com.yanlei.model.SumAndAvg" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+            id,
+            `name`,
+            sum(int_value) AS intValue,
+            double_value AS doubleValue,
+            cycle,
+            unit,
+            level,
+            level2,
+            level3,
+            source
+            FROM
+            government_department
+        <where>
+            <if test="name != null and name != '' ">
+                and `name` = #{name}
+            </if>
+            <if test="startTime != null ">
+                and date(acquisition_time) <![CDATA[ >= ]]> date(#{startTime,jdbcType=TIMESTAMP})
+            </if>
+            <if test="endTime != null ">
+                and date(acquisition_time) <![CDATA[ <= ]]> date(#{endTime,jdbcType=TIMESTAMP})
+            </if>
+        </where>
+
+    </select>
+
+
+    <select id="findMonthAvg" parameterType="com.yanlei.model.SumAndAvg" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+        id,
+        `name`,
+        avg(int_value) AS intValue,
+        double_value AS doubleValue,
+        cycle,
+        unit,
+        level,
+        level2,
+        level3,
+        source
+        FROM
+        government_department
+        <where>
+            <if test="name != null and name != '' ">
+                and `name` = #{name}
+            </if>
+            <if test="startTime != null ">
+                and date(acquisition_time) <![CDATA[ >= ]]> date(#{startTime,jdbcType=TIMESTAMP})
+            </if>
+            <if test="endTime != null ">
+                and date(acquisition_time) <![CDATA[ <= ]]> date(#{endTime,jdbcType=TIMESTAMP})
+            </if>
+        </where>
+    </select>
+</mapper>

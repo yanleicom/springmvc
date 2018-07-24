@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanlei.dao.webdao.BusinessDataDao">
+
+    <sql id="value">
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="app_id != null" >
+                app_id,
+            </if>
+            <if test="user_id != null" >
+                user_id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="int_value != null" >
+                int_value,
+            </if>
+            <if test="double_value != null" >
+                double_value,
+            </if>
+            <if test="acquisition_time != null" >
+                acquisition_time,
+            </if>
+            <if test="cycle != null" >
+                cycle,
+            </if>
+            <if test="encrypted != null" >
+                encrypted,
+            </if>
+            <if test="update_time != null" >
+                update_time,
+            </if>
+            <if test="department_id != null" >
+                department_id,
+            </if>
+            <if test="start_time != null" >
+                start_time,
+            </if>
+            <if test="end_time != null" >
+                end_time,
+            </if>
+            <if test="area_id != null" >
+                area_id,
+            </if>
+            <if test="statict_type != null" >
+                statict_type,
+            </if>
+            <if test="unit != null" >
+                unit,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="appId != null" >
+                #{appId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="intValue != null" >
+                #{intValue,jdbcType=BIGINT},
+            </if>
+            <if test="doubleValue != null" >
+                #{doubleValue,jdbcType=DOUBLE},
+            </if>
+            <if test="acquisitionTime != null" >
+                #{acquisitionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cycle != null" >
+                #{cycle,jdbcType=VARCHAR},
+            </if>
+            <if test="encrypted != null" >
+                #{encrypted,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="departmentId != null" >
+                #{departmentId,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null" >
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null" >
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="areaId != null" >
+                #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="statictType != null" >
+                #{statictType,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null" >
+                #{unit,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="oneset">
+        <set >
+            <if test="app_id != null" >
+                app_id = #{appId,jdbcType=INTEGER},
+            </if>
+            <if test="user_id != null" >
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="int_value != null" >
+                int_value = #{intValue,jdbcType=BIGINT},
+            </if>
+            <if test="double_value != null" >
+                double_value = #{doubleValue,jdbcType=DOUBLE},
+            </if>
+            <if test="acquisition_time != null" >
+                acquisition_time = #{acquisitionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cycle != null" >
+                cycle = #{cycle,jdbcType=VARCHAR},
+            </if>
+            <if test="encrypted != null" >
+                encrypted = #{encrypted,jdbcType=INTEGER},
+            </if>
+            <if test="update_time != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="department_id != null" >
+                department_id = #{departmentId,jdbcType=INTEGER},
+            </if>
+            <if test="start_time != null" >
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="end_time != null" >
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="area_id != null" >
+                area_id = #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="statict_type != null" >
+                statict_type = #{statictType,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null" >
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+        </set>
+    </sql>
+
+
+    <select id="findBusinessDatas" resultType="com.yanlei.model.BusinessData">
+        SELECT
+            id,
+            app_id AS appID,
+            user_id AS userId,
+            NAME,
+            int_value AS intValue,
+            double_value AS doubleValue,
+            acquisition_time AS acquisitionTime,
+            cycle,
+            encrypted,
+            update_time AS updateTime,
+            department_id AS departmentId,
+            start_time AS startTime,
+            end_time AS endTime,
+            area_id AS areaId,
+            statict_type AS statictType,
+            `level`,
+            level2,
+            level3
+        FROM
+            business_data
+
+    </select>
+
+
+    <select id="getBusinessDataById" parameterType="java.lang.Integer" resultType="com.yanlei.model.BusinessData">
+         SELECT
+            id,
+            app_id AS appID,
+            user_id AS userId,
+            NAME,
+            int_value AS intValue,
+            double_value AS doubleValue,
+            acquisition_time AS acquisitionTime,
+            cycle,
+            encrypted,
+            update_time AS updateTime,
+            department_id AS departmentId,
+            start_time AS startTime,
+            end_time AS endTime,
+            area_id AS areaId,
+            statict_type AS statictType,
+            `level`,
+            level2,
+            level3
+        FROM
+            business_data
+        WHERE id=#{id}
+    </select>
+
+
+    <insert id="saveBusinessData" parameterType="com.yanlei.model.BusinessData" keyProperty="id"
+            useGeneratedKeys="true">
+        INSERT INTO business_data
+        <include refid="value"/>
+    </insert>
+
+
+    <update id="updateBusinessData" parameterType="com.yanlei.model.BusinessData">
+        UPDATE business_data
+        <include refid="oneset"/>
+        WHERE id = #{id}
+    </update>
+
+
+    <insert id="saveBusinessDatas" parameterType="java.util.List">
+        insert into business_data
+        (app_id, user_id,
+        name, int_value, double_value,
+        acquisition_time, cycle, encrypted,
+        update_time, department_id, start_time,
+        end_time, area_id, statict_type,unit)
+        values
+        <foreach collection="list" item="businessData" separator=",">
+            (#{businessData.appId,jdbcType=INTEGER}, #{businessData.userId,jdbcType=INTEGER},
+            #{businessData.name,jdbcType=VARCHAR}, #{businessData.intValue,jdbcType=BIGINT}, #{businessData.doubleValue,jdbcType=DOUBLE},
+            #{businessData.acquisitionTime,jdbcType=TIMESTAMP}, #{businessData.cycle,jdbcType=VARCHAR}, #{businessData.encrypted,jdbcType=INTEGER},
+            #{businessData.updateTime,jdbcType=TIMESTAMP}, #{businessData.departmentId,jdbcType=INTEGER}, #{businessData.startTime,jdbcType=TIMESTAMP},
+            #{businessData.endTime,jdbcType=TIMESTAMP}, #{businessData.areaId,jdbcType=INTEGER}, #{businessData.statictType,jdbcType=VARCHAR},
+            #{businessData.unit,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+</mapper>

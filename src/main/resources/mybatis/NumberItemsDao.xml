@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanlei.dao.NumberItemsDao">
+
+    <select id="findZdpyc" resultType="com.yanlei.model.Zdpyc">
+        SELECT * FROM zdpyc
+    </select>
+
+    <select id="findZdpycYear" resultType="com.yanlei.model.ZdpycYear">
+        SELECT * from zdpyc_year
+    </select>
+
+    <select id="findZdpycMonth" resultType="com.yanlei.model.ZdpycYear">
+        SELECT * from zdpyc_month
+    </select>
+
+    <select id="findZdpycDay" resultType="com.yanlei.model.ZdpycYear">
+        SELECT * from zdpyc_day
+    </select>
+
+    <select id="findComputer" resultType="com.yanlei.model.Computer">
+        SELECT * from computer
+    </select>
+
+    <select id="findDepartmentQwb" resultType="com.yanlei.model.Qwb">
+        SELECT * FROM department_qwb
+    </select>
+
+    <select id="findDepartmentZfb" resultType="com.yanlei.model.Zfb">
+        SELECT * FROM department_zfb
+    </select>
+
+    <select id="findDepartmentRdb" resultType="com.yanlei.model.Rlb">
+        SELECT * FROM department_rdb
+    </select>
+
+    <select id="findDepartmentQjw" resultType="com.yanlei.model.Qjw">
+        SELECT * FROM department_qjw
+    </select>
+
+    <select id="findDepartmentZx" resultType="com.yanlei.model.Zx">
+        SELECT * FROM department_zx
+    </select>
+
+    <update id="updateZdpyc" parameterType="com.yanlei.model.Zdpyc">
+        update zdpyc
+        <set >
+            <if test="column1 != null" >
+                column1 = #{column1,jdbcType=VARCHAR},
+            </if>
+            <if test="column2 != null" >
+                column2 = #{column2,jdbcType=VARCHAR},
+            </if>
+            <if test="column3 != null" >
+                column3 = #{column3,jdbcType=VARCHAR},
+            </if>
+            <if test="column4 != null" >
+                column4 = #{column4,jdbcType=VARCHAR},
+            </if>
+            <if test="column5 != null" >
+                column5 = #{column5,jdbcType=VARCHAR},
+            </if>
+            <if test="column6 != null" >
+                column6 = #{column6,jdbcType=BIGINT},
+            </if>
+            <if test="column7 != null" >
+                column7 = #{column7,jdbcType=VARCHAR},
+            </if>
+            <if test="column8 != null" >
+                column8 = #{column8,jdbcType=VARCHAR},
+            </if>
+            <if test="column9 != null" >
+                column9 = #{column9,jdbcType=VARCHAR},
+            </if>
+            <if test="column10 != null" >
+                column10 = #{column10,jdbcType=VARCHAR},
+            </if>
+            <if test="column11 != null" >
+                column11 = #{column11,jdbcType=VARCHAR},
+            </if>
+            <if test="column12 != null" >
+                column12 = #{column12,jdbcType=VARCHAR},
+            </if>
+            <if test="column13 != null" >
+                column13 = #{column13,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteAllYear" >
+        DELETE  FROM zdpyc_year
+    </delete>
+
+    <insert id="addYear" parameterType="java.util.List">
+        insert into zdpyc_year
+        (column1, column2, column3, updatetime)
+        values
+        <foreach collection ="list" item="year" separator =",">
+            (#{year.column1},#{year.column2},#{year.column3},#{year.updatetime})
+        </foreach >
+    </insert>
+
+    <delete id="delAllComputers" >
+        DELETE FROM computer
+    </delete>
+
+    <insert id="addComputers" parameterType="java.util.List">
+        INSERT INTO computer (name,value) VALUES
+        <foreach collection ="list" item="computers" separator =",">
+            (#{computers.name},#{computers.value})
+        </foreach >
+    </insert>
+</mapper>

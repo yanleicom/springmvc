@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanlei.dao.QuartzDao">
+
+
+    <delete id="delAll" >
+        DELETE FROM government_department
+    </delete>
+
+    <select id="findBusinessDataforOne" parameterType="java.lang.Integer" resultType="com.yanlei.model.BusinessData">
+        SELECT
+            int_value AS intValue,
+            double_value AS doubleValue,
+            cycle,
+            department_id AS departmentId,
+            unit,
+            NAME,
+            level,
+            level2,
+            level3,
+            MAX(acquisition_time) AS acquisitionTime,
+            source
+        FROM
+            business_data
+        WHERE
+            area_id = #{0}
+        GROUP BY
+            `name`,cycle,level,level2,level3
+    </select>
+
+    <select id="findAreaIDforOne" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+            `name`,
+            int_value AS intValue,
+            double_value AS doubleValue,
+            acquisition_time AS acquisitionTime,
+            cycle,
+            department_id AS departmentId,
+            unit,
+            type,
+            level,
+            level2,
+            level3,
+            source
+        FROM
+            government_department
+    </select>
+
+    <insert id="saveGovernmentDepartments" parameterType="com.yanlei.model.BusinessData">
+         INSERT INTO government_department
+          (name,int_value,double_value,acquisition_time,cycle,department_id,unit,level,level2,level3,source)
+          values
+        <foreach collection="list" item="areaidOne" separator=",">
+            (#{areaidOne.name}, #{areaidOne.intValue}, #{areaidOne.doubleValue}
+            , #{areaidOne.acquisitionTime}, #{areaidOne.cycle}
+            , #{areaidOne.departmentId}, #{areaidOne.unit}
+            , #{areaidOne.level}, #{areaidOne.level2}, #{areaidOne.level3}, #{areaidOne.source})
+        </foreach>
+    </insert>
+
+
+    <delete id="delAllTwo" >
+         DELETE FROM government_society
+    </delete>
+
+    <insert id="saveGovernmentSociety" parameterType="com.yanlei.model.BusinessData">
+        INSERT INTO government_society
+        (name,int_value,double_value,acquisition_time,cycle,department_id,unit,level,level2,level3,source)
+        values
+        <foreach collection="list" item="areaidTwo" separator=",">
+            (#{areaidTwo.name}, #{areaidTwo.intValue}, #{areaidTwo.doubleValue}
+            , #{areaidTwo.acquisitionTime}, #{areaidTwo.cycle}
+            , #{areaidTwo.departmentId}, #{areaidTwo.unit}
+            , #{areaidTwo.level}, #{areaidTwo.level2}, #{areaidTwo.level3}, #{areaidTwo.source})
+        </foreach>
+    </insert>
+
+    <delete id="delAllThree" >
+        DELETE FROM government_culture
+    </delete>
+
+    <insert id="saveGovernmentCulture" parameterType="com.yanlei.model.BusinessData">
+        INSERT INTO government_culture
+        (name,int_value,double_value,acquisition_time,cycle,department_id,unit,level,level2,level3,source)
+        values
+        <foreach collection="list" item="areaidThree" separator=",">
+            (#{areaidThree.name}, #{areaidThree.intValue}, #{areaidThree.doubleValue}
+            , #{areaidThree.acquisitionTime}, #{areaidThree.cycle}
+            , #{areaidThree.departmentId}, #{areaidThree.unit}
+            , #{areaidThree.level}, #{areaidThree.level2}, #{areaidThree.level3}, #{areaidThree.source})
+        </foreach>
+    </insert>
+
+
+    <delete id="delAllFour" >
+        DELETE FROM government_economic
+    </delete>
+
+    <insert id="saveGovernmentEconomic" parameterType="com.yanlei.model.BusinessData">
+        INSERT INTO government_economic
+        (name,int_value,double_value,acquisition_time,cycle,department_id,unit,level,level2,level3,source)
+        values
+        <foreach collection="list" item="areaidFour" separator=",">
+            (#{areaidFour.name}, #{areaidFour.intValue}, #{areaidFour.doubleValue}
+            , #{areaidFour.acquisitionTime}, #{areaidFour.cycle}
+            , #{areaidFour.departmentId}, #{areaidFour.unit}
+            , #{areaidFour.level}, #{areaidFour.level2}, #{areaidFour.level3}, #{areaidFour.source})
+        </foreach>
+    </insert>
+</mapper>

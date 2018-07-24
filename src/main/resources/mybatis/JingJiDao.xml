@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanlei.dao.showData.JingJiDao">
+
+   <select id="findPageOne" parameterType="java.lang.String" resultType="com.yanlei.model.GovernmentDepartment">
+       SELECT
+            id,
+            `name`,
+            int_value AS intValue,
+            double_value AS doubleValue,
+            acquisition_time AS acquisitionTime,
+            cycle,
+            unit,
+			type,
+            level,
+            level2,
+            level3,
+            source
+        FROM
+            government_jingji
+        WHERE
+            level = #{0}
+   </select>
+
+
+    <select id="findPageTwo" parameterType="java.lang.String" resultType="com.yanlei.model.GovernmentDepartment">
+          SELECT
+            id,
+            `name`,
+            int_value AS intValue,
+            double_value AS doubleValue,
+            acquisition_time AS acquisitionTime,
+            cycle,
+            unit,
+			type,
+            level,
+            level2,
+            level3,
+            source
+        FROM
+            government_jingji
+				WHERE `level` = #{0}
+        GROUP BY level2,`name`,`level`
+    </select>
+
+
+    <select id="findPageLevel" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT
+            level2
+        FROM
+            government_jingji
+        WHERE
+            `level` = #{0}
+        GROUP BY
+	        level2
+    </select>
+
+    <select id="findLevel2Name" parameterType="java.lang.String" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+            id,`name`,int_value AS intValue,`level`,level2,unit,source
+        FROM
+            government_jingji
+        WHERE
+            level2 = #{0}
+    </select>
+
+
+    <select id="findNameAndIntValue" parameterType="java.lang.String" resultType="com.yanlei.model.GovernmentDepartment">
+        SELECT
+            `name`,int_value AS intValue
+        FROM
+            government_jingji
+        WHERE
+            level = #{0} AND level2 = #{1}
+    </select>
+</mapper>

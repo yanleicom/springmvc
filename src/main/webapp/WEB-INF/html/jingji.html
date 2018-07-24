@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="/yanlei/css/jingji/Economics_style.css" />
+	</head>
+
+	<body>
+		<div id="container">
+			<!--左侧嵌套环形图-->
+			<div id="session_one">
+				<h1 class="title">2018年2月主要完成指标情况（计量单位：亿元）</h1>
+				<div id="pie" style="width: 1000px;height: 750px;display: inline-block;"></div>
+				<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+				<script type="text/javascript">
+					var dom = document.getElementById("pie");
+					var myChart = echarts.init(dom);
+					var app = {};
+					option = null;
+					app.title = '嵌套环形图';
+
+					option = {
+						tooltip: {
+							trigger: 'item',
+							formatter: "{b}"
+						},
+						//图例
+						legend: {
+							left: 34,
+							itemWidth: 20, //图例标记的图形宽度
+							itemHeight: 17, //图例标记的图形高度
+							orient: 'vertical',
+							x: 'left',
+							y: 'center',
+							data: ['地区生成总值', '工业增加值', '第三产业', '财政总收入', '公共预算', '消费品零售', '固定投资', '外贸出口', '高新技术', '杭州到位资金', '代为外资', '浙商到位资金'],
+							textStyle: { //图例文字的样式
+								color: '#333', //文字颜色
+								fontSize: 13, //文字大小
+								padding: [15, 3]
+							}
+						},
+						series: [{
+								name: '访问来源',
+								type: 'pie',
+								selectedMode: 'single',
+								radius: [0, '25%'],
+
+								label: {
+									normal: {
+										textStyle: {
+											color: 'rgba(255, 255, 255,0)'
+										}
+									}
+								},
+								labelLine: {
+									normal: {
+										lineStyle: {
+											color: 'rgba(255, 255, 255,0)'
+										},
+										smooth: 1,
+										length: 0,
+										length2: 15
+									}
+								},
+								data: [{
+										value: 335,
+										show: false,
+										name: '杭州到位资金',
+
+										itemStyle: {
+											color: '#63B4F2',
+											borderColor: '#fff',
+											borderWidth: 1,
+										},
+									},
+									{
+										value: 679,
+										name: '代为外资',
+										itemStyle: {
+											color: '#7FCFF4',
+											borderColor: '#fff',
+											borderWidth: 1,
+										},
+									},
+									{
+										value: 1548,
+										name: '浙商到位资金',
+										itemStyle: {
+											color: '#8FDC6D',
+											borderColor: '#fff',
+											borderWidth: 1,
+										},
+									}
+								]
+							},
+							{
+								name: '累计完成',
+								type: 'pie',
+								radius: ['35%', '46%'],
+								labelLine: {
+									normal: {
+										lineStyle: {
+											color: 'rgba(0, 0, 0,0.2)'
+										},
+										smooth: 0.1,
+										length: 15,
+										length2: 15
+									}
+								},
+								label: {
+									normal: {
+										formatter: '{a}:      {per|{d}%} {abg|}\n{hr|}\n   {b|  到位外资：{c}（亿元）}  ',
+										color: '#000',
+										rich: {
+											//访问来源
+											a: {
+												color: '#999',
+												lineHeight: 22,
+												align: 'center'
+											},
+											hr: {
+												borderColor: '#848484',
+												width: '90%',
+												borderWidth: 0.2,
+												height: 0,
+
+											},
+											b: {
+												fontSize: 13,
+												lineHeight: 22,
+												color: '#000'
+											},
+
+											per: {
+												fontSize: 15,
+												fontWeight: 'bolder',
+												color: '#355F80',
+												padding: [4, 4],
+											}
+										}
+									}
+								},
+								data: [{
+										value: 85,
+										name: '地区生成总值',
+										itemStyle: {
+											color: '#544017',
+											borderColor: '#fff',
+											borderWidth: 1,
+										},
+									},
+									{
+										value: 175,
+										name: '工业增加值',
+										itemStyle: {
+											color: '#7D6B51',
+											borderColor: '#fff',
+											borderWidth: 1,
+										},
+									},
+									{
+										value: 285,
+										name: '第三产业',
+										itemStyle: {
+											color: '#E0A43E',
+											borderColor: '#fff',
+											borderWidth: 1,
+										},
+									},
+									{
+										value: 225,
+										name: '财政总收入',
+										itemStyle: {
+											color: '#F3CF85',
+											borderColor: '#fff',
+											borderWidth: 1,
+										},
+									},
+									{
+										value: 104,
+										name: '公共预算',
+										itemStyle: {
+											color: '#F1DFBF',
+											borderColor: '#fff',
+											borderWidth: 1,
+										},
+									},
+									{
+										value: 85,
+										name: '消费品零售',
+										itemStyle: {
+											color: '#CED7DA',
+											borderColor: '#fff',
+											borderWidth: 1,
+										},
+									},
+									{
+										value: 95,
+										name: '固定投资',
+										itemStyle: {
+											color: '#9CADBC',
+											borderColor: '#fff',
+											borderWidth: 1,
+										},
+									},
+									{
+										value: 109,
+										name: '外贸出口',
+										itemStyle: {
+											color: '#6A93BC',
+											borderColor: '#fff',
+											borderWidth: 1,
+										},
+									},
+									{
+										value: 247,
+										name: '高新技术',
+										itemStyle: {
+											color: '#355F80',
+											borderColor: '#fff',
+											borderWidth: 1,
+										},
+									}
+								]
+							}
+						]
+					};
+					if(option && typeof option === "object") {
+						myChart.setOption(option, true);
+					}
+				</script>
+			</div>
+
+			<div id="right">
+				<!--右上角嵌套柱形图-->
+				<div id="session_right_top">
+					<h4 class="right_1_title">2018年2月街道经济</h4>
+					<div id="bar_top" style="width: 700px;height: 330px;margin-top: 45px;margin-left: 25px;">
+
+					</div>
+					<script type="text/javascript">
+						var dom = document.getElementById("bar_top");
+						var myChart_bar = echarts.init(dom);
+						var app = {};
+						option = null;
+						app.title = '嵌套柱形图';
+						option = {
+							tooltip: {
+								trigger: 'axis',
+								axisPointer: { // 坐标轴指示器，坐标轴触发有效
+									type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+								}
+							},
+
+							//图例
+							legend: {
+								left: 6,
+								itemWidth: 14, //图例标记的图形宽度
+								itemHeight: 7, //图例标记的图形高度
+
+								data: ['限额消费品零售额', '固定资产投资', '地方公共预算', '杭外到位资金', '到位外资', '浙商到位资金', '限额贸易销售额', '其他服务业']
+
+							},
+							grid: {
+								left: '1%',
+								right: '7%',
+								bottom: '3%',
+								containLabel: true
+							},
+
+							xAxis: [{
+								type: 'category',
+								data: ['天水街道', '武林街道', '长庆街道', '潮鸣街道', '朝晖街道', '文晖街道', '东新街道','石桥街道'],
+								axisLine: {
+									lineStyle: {
+										type: 'solid',
+										color: '#ccc', //左边线的颜色
+										//					                        width:'0'//坐标线的宽度
+									}
+								},
+								axisLabel: {
+									textStyle: {
+										color: '#000', //坐标值得具体的颜色
+
+									}
+								}
+							}],
+							yAxis: [{
+								type: 'value',
+								splitLine: {
+									show: true,
+									color: '#E5E5E5',
+									width: '1'
+								}, //去除网格线
+								splitArea: {
+									show: true
+								}, //保留网格区域
+								axisLine: {
+									lineStyle: {
+										type: 'solid',
+										color: '#fff',
+										width: '1'
+									}
+								},
+								axisLabel: {
+									textStyle: {
+										color: '#000'
+									}
+								}
+							}],
+
+							series: [{
+									name: '限额消费品零售额',
+									type: 'bar',
+									data: [320, 332, 301, 334, 390, 330, 320,222],
+									itemStyle: {
+										color: '#355F80',
+									}
+								},
+								{
+									name: '固定资产投资',
+									type: 'bar',
+									stack: '广告',
+									data: [120, 132, 101, 134, 90, 230, 210,322],
+									itemStyle: {
+										color: '#6A93BC',
+									}
+								},
+								{
+									name: '地方公共预算',
+									type: 'bar',
+									stack: '广告',
+									data: [220, 182, 191, 234, 290, 330, 310,333],
+									itemStyle: {
+										color: '#9CADBC',
+									}
+								},
+								{
+									name: '杭外到位资金',
+									type: 'bar',
+									stack: '广告',
+									data: [150, 232, 201, 154, 190, 330, 410,123],
+									itemStyle: {
+										color: '#7FCFF4',
+									}
+								},
+								{
+									name: '到位外资',
+									type: 'bar',
+									data: [862, 1018, 964, 1026, 1679, 1600, 1570,444],
+									itemStyle: {
+										color: '#E0A43E',
+									}
+
+								},
+								{
+									name: '浙商到位资金',
+									type: 'bar',
+									barWidth: 5,
+									stack: '搜索引擎',
+									data: [620, 732, 701, 734, 1090, 1130, 1120,666],
+									itemStyle: {
+										color: '#7D6B51',
+									}
+								},
+								{
+									name: '限额贸易销售额',
+									type: 'bar',
+									stack: '搜索引擎',
+									data: [120, 132, 101, 134, 290, 230, 220,777]
+								},
+								{
+									name: '其他服务业',
+									type: 'bar',
+									stack: '搜索引擎',
+									data: [60, 72, 71, 74, 190, 130, 110,666]
+								},
+								
+							]
+						};
+
+						if(option && typeof option === "object") {
+							myChart_bar.setOption(option, true);
+						}
+					</script>
+				</div>
+
+				<!--右下角左侧折线图-->
+				<div id="session_bottom_left">
+					<h4 class="right_1_title">2018年2月财务收入(测试数据)</h4>
+					<div id="bar_bottom_left" style="width: 390px;height:280px;margin-left: 4%;margin-top: 10%;">
+
+					</div>
+					<script type="text/javascript">
+						var dom = document.getElementById("bar_bottom_left");
+						var myChart_line_left = echarts.init(dom);
+						var app = {};
+						option1 = null;
+						app.title = '折线图1';
+						option1 = {
+							tooltip: {
+								trigger: 'axis'
+							},
+
+							//图例
+							legend: {
+								right: 28,
+								itemWidth: 20, //图例标记的图形宽度
+								itemHeight: 7, //图例标记的图形高度
+								data: ['第一季度', '第二季度', '第三季度']
+
+							},
+							grid: {
+								left: '1%',
+								right: '10%',
+								top: '18%',
+								bottom: '10%',
+								containLabel: true
+							},
+							calculable: true,
+							xAxis: [{
+								type: 'category',
+								boundaryGap: false,
+								data: ['增值税', '营业税', '消费税', '房产税', '契税'],
+								axisLine: {
+									lineStyle: {
+										type: 'solid',
+										color: '#ccc', //左边线的颜色
+										width: '1' //坐标线的宽度
+									}
+								},
+								axisLabel: {
+									textStyle: {
+										color: '#000', //坐标值得具体的颜色
+
+									}
+								}
+							}],
+							yAxis: [{
+								type: 'value',
+								splitLine: {
+									show: true,
+									color: '#E5E5E5',
+									width: '1'
+								}, //去除网格线
+								splitArea: {
+									show: true
+								}, //保留网格区域
+								axisLine: {
+									lineStyle: {
+										type: 'solid',
+										color: '#fff',
+										width: '1'
+									}
+								},
+								axisLabel: {
+									textStyle: {
+										color: '#000'
+									}
+								}
+							}],
+
+							series: [
+
+								{
+									name: '第一季度',
+									type: 'line',
+									stack: '总量',
+									symbol: 'circle',
+									symbolSize: 4,
+									itemStyle: {
+										normal: {
+											color: '#355F80',
+											borderColor: '#355F80', //拐点边框颜色  
+										}
+									},
+									data: [150, 232, 201, 154, 190]
+								},
+
+								{
+									name: '第二季度',
+									type: 'line',
+									stack: '总量',
+									symbol: 'circle',
+									symbolSize: 4,
+									itemStyle: {
+										normal: {
+											color: '#E0A43E',
+											borderColor: '#E0A43E', //拐点边框颜色  
+										}
+									},
+									data: [320, 332, 301, 334, 390]
+								},
+								{
+									name: '第三季度',
+									type: 'line',
+									stack: '总量',
+									symbol: 'circle',
+									symbolSize: 4,
+									itemStyle: {
+										normal: {
+											color: '#7D6B51',
+											borderColor: '#7D6B51', //拐点边框颜色  
+										}
+									},
+									data: [820, 932, 901, 934, 1290]
+								}
+							]
+						};
+						if(option1 && typeof option1 === "object") {
+							myChart_line_left.setOption(option1, true);
+						}
+					</script>
+
+				</div>
+				<!--右下角右侧折线图-->
+				<div id="session_bottom_right">
+					<h4 class="right_1_title">2018年2月国内贸易(测试数据)</h4>
+					<div id="bar_bottom_right" style="width: 270px;height: 280px;margin-top: 10%;margin-left: 6%;">
+
+					</div>
+					<script type="text/javascript">
+						var dom = document.getElementById("bar_bottom_right");
+						var myChart_line_right = echarts.init(dom);
+						var app = {};
+						option2 = null;
+						app.title = '折线图1';
+						option2 = {
+							tooltip: {
+								trigger: 'axis'
+							},
+							//图例
+							legend: {
+								right: 30,
+								itemWidth: 20, //图例标记的图形宽度
+								itemHeight: 7, //图例标记的图形高度
+								data: ['第一季度', '第二季度', '第三季度']
+
+							},
+							grid: {
+								left: '1%',
+								right: '13%',
+								top: '18%',
+								bottom: '10%',
+								containLabel: true
+							},
+							calculable: true,
+
+							xAxis: [{
+								type: 'category',
+								boundaryGap: false,
+								data: ['生产要素贸易', '技术贸易', '服务技术贸易', '区际贸易', '证券贸易'],
+								axisLine: {
+									lineStyle: {
+										type: 'solid',
+										color: '#ccc', //左边线的颜色
+										width: '1' //坐标线的宽度
+									}
+								},
+								axisLabel: {
+									textStyle: {
+										color: '#000', //坐标值得具体的颜色
+
+									}
+								}
+							}],
+							yAxis: [{
+								type: 'value',
+								splitLine: {
+									show: true,
+									color: '#E5E5E5',
+									width: '1'
+								}, //去除网格线
+								splitArea: {
+									show: true
+								}, //保留网格区域
+								axisLine: {
+									lineStyle: {
+										type: 'solid',
+										color: '#fff',
+										width: '1'
+									}
+								},
+								axisLabel: {
+									textStyle: {
+										color: '#000'
+									}
+								}
+							}],
+
+							series: [
+
+								{
+									name: '第一季度',
+									type: 'line',
+									stack: '总量',
+									symbol: 'circle',
+									symbolSize: 4,
+									itemStyle: {
+										normal: {
+											color: '#355F80',
+											borderColor: '#355F80', //拐点边框颜色  
+										}
+									},
+									data: [150, 232, 201, 154, 190]
+								},
+
+								{
+									name: '第二季度',
+									type: 'line',
+									stack: '总量',
+									symbol: 'circle',
+									symbolSize: 4,
+									itemStyle: {
+										normal: {
+											color: '#E0A43E',
+											borderColor: '#E0A43E', //拐点边框颜色  
+										}
+									},
+									data: [320, 332, 301, 334, 390]
+								},
+								{
+									name: '第三季度',
+									type: 'line',
+									stack: '总量',
+									symbol: 'circle',
+									symbolSize: 4,
+									itemStyle: {
+										normal: {
+											color: '#7D6B51',
+											borderColor: '#7D6B51', //拐点边框颜色  
+										}
+									},
+									data: [820, 932, 901, 934, 1290]
+								}
+							]
+						};
+						if(option2 && typeof option2 === "object") {
+							myChart_line_right.setOption(option2, true);
+						}
+					</script>
+				</div>
+
+			</div>
+
+		</div>
+	</body>
+
+</html>

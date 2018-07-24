@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanlei.dao.UserDao">
+    <select id="findUsername" resultType="java.lang.String">
+        SELECT username FROM `user` where username = #{username,jdbcType=VARCHAR}
+    </select>
+
+    <insert id="addUser" parameterType="com.yanlei.model.User">
+        INSERT INTO user (username,password) VALUES (#{0},#{1})
+    </insert>
+
+    <select id="findUserAndPass" parameterType="java.lang.String" resultType="com.yanlei.model.User">
+        SELECT * FROM `user` where username=#{0} AND `password` = #{1}
+    </select>
+</mapper>
