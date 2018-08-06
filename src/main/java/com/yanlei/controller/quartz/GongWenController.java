@@ -55,7 +55,7 @@ public class GongWenController {
     private LuXiService luXiService;
 
 
-    //公文数据 page 每五分钟定时一次
+    //公文数据 page 每十五分钟定时一次
     public void insertGongWen() {
         String s = httpDataUtil.login("xiejie");
         Login login = JSON.parseObject(s, Login.class);

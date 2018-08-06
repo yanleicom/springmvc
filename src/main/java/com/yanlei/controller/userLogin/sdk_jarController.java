@@ -110,8 +110,8 @@ public class sdk_jarController {
 
         //res.sendRedirect( req.getServletContext().getRealPath("/")+"admin.html");
         //res.sendRedirect("http://zh.hzxc.gov.cn/apphub/");
-        res.sendRedirect("http://172.16.9.61:8080/yanlei/main.html");
-//        res.sendRedirect("http://10.18.58.170:8081/main.html");
+        res.sendRedirect("http://172.16.9.61:8080/yanlei/main.html?tokenid="+tokenid+"&"+"userName="+username);
+//        res.sendRedirect("http://10.18.58.170:8081/main.html?tokenid="+tokenid+"&"+"userName="+username);
         return null;
         // return this.seccuss;//成功界面
         //return null;

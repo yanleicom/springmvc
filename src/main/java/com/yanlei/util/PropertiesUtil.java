@@ -10,7 +10,7 @@ import java.util.Properties;
  * 键值对文件
  * @ClassName PropertiesUtil.java
  * @Description:x
- * @author QDK
+ * @author x
  * @date 2017年12月25日下午3:07:52
  *
  */
@@ -23,7 +23,7 @@ public class PropertiesUtil {
 	 * @param @return   
 	 * @return String  
 	 * @throws
-	 * @author QDK
+	 * @author x
 	 * @date 2017年12月25日
 	 */
 	      public static String GetValueByKey(String filePath, String key) {
@@ -47,7 +47,7 @@ public class PropertiesUtil {
 	       * @param @throws IOException   ilePath 路径
 	       * @return void  
 	       * @throws
-	       * @author QDK
+	       * @author x
 	       * @date 2017年12月25日
 	       */
 	     public static Map<String, String> GetAllProperties(String filePath) throws IOException {
@@ -79,7 +79,7 @@ public class PropertiesUtil {
 	      * @param @throws IOException   
 	      * @return void  
 	      * @throws
-	      * @author QDK
+	      * @author x
 	      * @date 2017年12月25日
 	      */
 	     public static void WriteProperties (String filePath, String pKey, String pValue) throws IOException {
