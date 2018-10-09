@@ -15,6 +15,7 @@ public class BigDecimalUtil {
         return f1;
     }
 
+
     //将元转换成亿元
     public static float BigDecimal(float i){
         float f1 = new BigDecimal(i * 0.00000001).setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();

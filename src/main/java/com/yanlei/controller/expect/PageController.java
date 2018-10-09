@@ -1,10 +1,9 @@
 package com.yanlei.controller.expect;
 
 import com.alibaba.fastjson.JSON;
-import com.besjon.pojo.JsonToJingji;
 import com.yanlei.model.GovernmentDepartment;
 import com.yanlei.service.showData.PageService;
-import com.yanlei.util.PropertiesUtil;
+import com.yanlei.util.PropertyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
-import static com.yanlei.controller.showData.PoliticsController.fileURL;
+//import static com.yanlei.controller.showData.PoliticsController.fileURL;
 
 /**
  * 政务数据的展示
@@ -32,7 +30,7 @@ public class PageController {
     private Logger logger = LoggerFactory.getLogger(PageController.class);
 
     //加载配置文件 读取K - V
-    Map<String, String> stringStringMap;
+   /* Map<String, String> stringStringMap;
 
     {
         try {
@@ -40,7 +38,7 @@ public class PageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     @Autowired
     private PageService pageService;
@@ -56,9 +54,9 @@ public class PageController {
             produces = "text/json;charset=UTF-8")
     @ResponseBody
     public String showPageOne(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
-
-        String pageOne = stringStringMap.get("pageOne");//2018年第一季度政务公开统计
+        //response.addHeader("Access-Control-Allow-Origin", "*");
+        String pageOne = PropertyUtil.getProperty("pageOne");
+        //String pageOne = stringStringMap.get("pageOne");//2018年第一季度政务公开统计
         String jsonToJingji = pageService.pageOne(pageOne);
         //logger.info(jsonToJingji);
         return jsonToJingji;
@@ -70,7 +68,7 @@ public class PageController {
             produces = "text/json;charset=UTF-8")
     @ResponseBody
     public String showPageDuCha() {
-        String pageDuCha = stringStringMap.get("pageDuCha");
+        //String pageDuCha = stringStringMap.get("pageDuCha");
         return null;
     }
 
@@ -86,7 +84,8 @@ public class PageController {
     @ResponseBody
     public String showPageGongWen(HttpServletResponse response) {
         // response.addHeader("Access-Control-Allow-Origin", "*");
-        String pageGongWen = stringStringMap.get("pageGongWen");
+        //String pageGongWen = stringStringMap.get("pageGongWen");
+        String pageGongWen = PropertyUtil.getProperty("pageGongWen");
         List<GovernmentDepartment> list = pageService.pageGongWen(pageGongWen);
         return JSON.toJSONString(list);
     }
@@ -101,8 +100,8 @@ public class PageController {
             produces = "text/json;charset=UTF-8")
     @ResponseBody
     public String showPageGongWenTwo()  {
-        String pageGongWen = stringStringMap.get("pageGongWen");
-
+        //String pageGongWen = stringStringMap.get("pageGongWen");
+        String pageGongWen = PropertyUtil.getProperty("pageGongWen");
         List<List<GovernmentDepartment>> list = pageService.pageDepartment(pageGongWen);
         return JSON.toJSONString(list);
     }
@@ -117,8 +116,8 @@ public class PageController {
             produces = "text/json;charset=UTF-8")
     @ResponseBody
     public String showPageMonthSum(HttpServletResponse response)  {
-        String pageGongWen = stringStringMap.get("pageGongWen");
-
+       // String pageGongWen = stringStringMap.get("pageGongWen");
+        String pageGongWen = PropertyUtil.getProperty("pageGongWen");
         String s = pageService.showPageMonthSum(pageGongWen);
         return s;
     }
@@ -133,8 +132,9 @@ public class PageController {
             produces = "text/json;charset=UTF-8")
     @ResponseBody
     public String showPageMonth(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        String pageGongWen = stringStringMap.get("pageGongWen");
+        //response.addHeader("Access-Control-Allow-Origin", "*");
+        String pageGongWen = PropertyUtil.getProperty("pageGongWen");
+        //String pageGongWen = stringStringMap.get("pageGongWen");
         String s = pageService.showPageMonth(pageGongWen);
         //logger.info(s);
         return s;

@@ -7,6 +7,7 @@ import com.yanlei.model.shehui.BuildingArea;
 import com.yanlei.model.shehui.Enterprise;
 import com.yanlei.model.shehui.People;
 import com.yanlei.service.showData.SheHuiService;
+import com.yanlei.util.BirthdayToAge;
 import com.yanlei.util.luxi.BigDecimalUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +38,12 @@ public class SheHuiServiceImpl implements SheHuiService {
 
     @Override
     public String findPeople() {
-
+        //redisTemplate.opsForValue().set("下城区人口情况",null);
         String s1 = redisTemplate.opsForValue().get("下城区人口情况");
         if (StringUtils.isNotBlank(s1)){
             return s1;
         }else {
+
             Map<String, Object> map = new HashMap<String, Object>();
             //人口总数
             Integer sum = sheHuiDao.findPeopleSum();
@@ -53,12 +55,31 @@ public class SheHuiServiceImpl implements SheHuiService {
             //女人口数
             Integer girlPeople = sum - manPeople;
             double f3 = BigDecimalUtil.BigDecimal(girlPeople);
-            //街道人口数
+            //街道人口数  ( 街道分类 + 人口count )
             List<People> list = sheHuiDao.findJieDaoPeople();
             for (People people : list) {
+                Integer underAge = 0;
+                Integer labour = 0;
+                Integer oldAge = 0;
+                //计算年龄分类 未成年(小于18), 为退休(小于60), 已退休人员(大于60)
+                List<String> birthday  = sheHuiDao.findAgeClass(people.getStreetName());
+                for (String s : birthday) {
+                    int agefromBirthTime = BirthdayToAge.getAgefromBirthTime(s);
+                    if (agefromBirthTime>0&&agefromBirthTime<18){
+                        underAge++;
+                    }else if (agefromBirthTime>0 && agefromBirthTime<60){
+                        labour++;
+                    }else if (agefromBirthTime>0 && agefromBirthTime>60){
+                        oldAge++;
+                    }
+                }
                 double f4 = BigDecimalUtil.BigDecimal(people.getIntValue());
                 people.setDoubleValue(f4);
                 people.setIntValue(null);
+                people.setUnderAge(BigDecimalUtil.BigDecimal(underAge));
+                people.setLabour(BigDecimalUtil.BigDecimal(labour));
+                people.setOldAge(BigDecimalUtil.BigDecimal(oldAge));
+                //System.out.println(people.getStreetName()+"未成年==:"+underAge +"劳动人员==:"+labour+ "老年==:"+oldAge);
             }
             //常驻人口 流动人口 还有 null 默认加为其他
             List<String> zhlx = sheHuiDao.findZhlx();

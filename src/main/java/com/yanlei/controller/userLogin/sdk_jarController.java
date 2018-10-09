@@ -2,11 +2,9 @@ package com.yanlei.controller.userLogin;
 
 
 import com.bamboocloud.api.ApphubSdk;
-import com.yanlei.util.luxi.BigDecimalUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.jms.Session;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +15,7 @@ import java.util.Map;
 /**
  * @Author: x
  * @Date: Created in 8:54 2018/4/25
- * 第三方登入对接 有事@小强
+ * 第三方登入对接 有事@小强(辞职,有事@竹云公司) cookie客户端保存tokenid 也可以在登入是获取用户的账号和tokenId去效验是否有效
  */
 
 @Controller

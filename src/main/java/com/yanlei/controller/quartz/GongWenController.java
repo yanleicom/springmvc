@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.yanlei.controller.showData.PoliticsController.fileURL;
+//import static com.yanlei.controller.showData.PoliticsController.fileURL;
 
 /**
  * @Author: x
@@ -31,7 +31,7 @@ public class GongWenController {
     //实时督查数据
     private static final String ducha_url = "http://xcgovapi.hzxc.gov.cn/Supervision-Module/Supervision/List";
     //实时公文数据
-    private static final String gongwen_url = "http://xcgovapi.hzxc.gov.cn/Document-Module/Document/GetListAll"; //公网
+    private static final String gongwen_url = "http://xcgovapi.hzxc.gov.cn/Document-Module/Document/GetListAll"; //公文
     //业务十日交换量测试地址 //81761
     private static  final String TenDays_exchange_url = "http://172.16.10.105:8080/jfinal_demo/event";
 
@@ -41,6 +41,7 @@ public class GongWenController {
     private static String loginName = "NO6lZyJjYRCAKd9R";
     private static String userName = "boyd";
 
+    /*public static final String fileURL = "C:\\MultipartFile\\config.properties";
     Map<String, String> stringStringMap;
 
     {
@@ -49,7 +50,7 @@ public class GongWenController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     @Autowired
     private LuXiService luXiService;
@@ -72,19 +73,19 @@ public class GongWenController {
         Map<String, Object> DataMap = (Map<String, Object>) responseMap.get("Data");
 
         //测试token postman 注意换resourceUri !! 督查和公文不同
-        //System.out.println(DataMap.get("token"));
+//        System.out.println(DataMap.get("token"));
         token = (String) DataMap.get("token");
-
-        String pageGongWen = stringStringMap.get("pageGongWen");
-
+        String pageGongWen = PropertyUtil.getProperty("pageGongWen");
+//        String pageGongWen = stringStringMap.get("pageGongWen");
+//        System.out.println(pageGongWen);
         //查询最大的时间
         Date date = luXiService.findMaxTime(pageGongWen);
         //System.out.println("查询时间"+date.getTime());
         Date date1 = DateUtil.addOneSecond(date); //最大时间加1秒 对接设计大于等于所以加1秒
         long startTime = DateUtil.dateToLong(date1); //大于数据库最大时间 传long值
-        //System.out.println("加一秒时间"+startTime);
+       // System.out.println("加一秒时间"+startTime);
         long endTime = new Date().getTime(); // 小于当前时间
-        //System.out.println(endTime);
+       // System.out.println(endTime);
         String officialDocument = httpDataUtil.getOfficialDocument(token,companyCode,companyShowID,loginName,userName,startTime,endTime);
         try {
             String s1 = httpDataUtil.doPost(gongwen_url, officialDocument);

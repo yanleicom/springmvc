@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -32,17 +31,17 @@ public class SanshiController {
      }
       @RequestMapping("/once")
      public ModelAndView once(HttpServletResponse res,HttpServletRequest request){
-          ModelAndView modelAndView = new ModelAndView("sanshi");
+          ModelAndView modelAndView = new ModelAndView("once");
           return modelAndView;
      }
      @RequestMapping("/terrace")
      public ModelAndView terrace(HttpServletResponse res,HttpServletRequest request){
-         ModelAndView modelAndView = new ModelAndView("sanshi");
+         ModelAndView modelAndView = new ModelAndView("terrace");
          return modelAndView;
      }
      @RequestMapping("/zhengwu")
      public ModelAndView zhengwu(HttpServletResponse res,HttpServletRequest request)  {
-         ModelAndView modelAndView = new ModelAndView("sanshi");
+         ModelAndView modelAndView = new ModelAndView("zhengwu");
          return modelAndView;
      }
 
@@ -77,6 +76,8 @@ public class SanshiController {
     @RequestMapping("/main")
     public ModelAndView main(HttpServletResponse res,HttpServletRequest request)  {
         return getModelAndView(res, request,"main");
+       /* ModelAndView modelAndView = new ModelAndView("main");
+        return modelAndView;*/
     }
 
 

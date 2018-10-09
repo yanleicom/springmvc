@@ -5,7 +5,7 @@ import com.besjon.pojo.JsonRootBean;
 import com.besjon.pojo.JsonRootBean3;
 import com.besjon.pojo.JsonRootBean5;
 import com.yanlei.service.showData.EconomicService;
-import com.yanlei.util.PropertiesUtil;
+import com.yanlei.util.PropertyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.util.Map;
 
-import static com.yanlei.controller.showData.PoliticsController.fileURL;
+
 
 /**
  * 图四 经济数据展示
@@ -37,10 +36,10 @@ public class EconomicController {
             produces = "text/json;charset=UTF-8")
     @ResponseBody
     public String showEconomicLeft() throws IOException {
-        Map<String, String> stringStringMap = PropertiesUtil.GetAllProperties(fileURL);
+        //Map<String, String> stringStringMap = PropertiesUtil.GetAllProperties(fileURL);
 
-        String sixteenName = stringStringMap.get("sixteenName");//分区域事件数 年,月,日
-
+        //String sixteenName = stringStringMap.get("sixteenName");//分区域事件数 年,月,日
+        String sixteenName = PropertyUtil.getProperty("sixteenName");
         JsonRootBean3 jsonRootBean = economicService.findFourLeft(sixteenName);
 
         if (jsonRootBean!=null){
@@ -58,10 +57,12 @@ public class EconomicController {
             produces = "text/json;charset=UTF-8")
     @ResponseBody
     public String showEconomicMiddle() throws IOException {
-        Map<String, String> stringStringMap = PropertiesUtil.GetAllProperties(fileURL);
+        //Map<String, String> stringStringMap = PropertiesUtil.GetAllProperties(fileURL);
+        //String seventeenName = stringStringMap.get("seventeenName");//网上办件总数
+        //String eighteenName = stringStringMap.get("eighteenName");//分类型事件数
 
-        String seventeenName = stringStringMap.get("seventeenName");//网上办件总数
-        String eighteenName = stringStringMap.get("eighteenName");//分类型事件数
+        String seventeenName = PropertyUtil.getProperty("seventeenName");
+        String eighteenName = PropertyUtil.getProperty("eighteenName");
 
         JsonRootBean5 jsonRootBean = economicService.findFourMiddle(seventeenName,eighteenName);
 
@@ -80,10 +81,10 @@ public class EconomicController {
             produces = "text/json;charset=UTF-8")
     @ResponseBody
     public String showEconomicRight() throws IOException {
-        Map<String, String> stringStringMap = PropertiesUtil.GetAllProperties(fileURL);
+        //Map<String, String> stringStringMap = PropertiesUtil.GetAllProperties(fileURL);
 
-        String nineteenName = stringStringMap.get("nineteenName");//分部门办件数
-
+       // String nineteenName = stringStringMap.get("nineteenName");//分部门办件数
+        String nineteenName = PropertyUtil.getProperty("nineteenName");
 
         JsonRootBean jsonRootBean = economicService.findFourRight(nineteenName);
 

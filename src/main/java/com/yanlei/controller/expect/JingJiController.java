@@ -4,21 +4,18 @@ import com.alibaba.fastjson.JSON;
 import com.besjon.pojo.JsonToJingji;
 import com.yanlei.model.GovernmentDepartment;
 import com.yanlei.service.showData.JingJiService;
-import com.yanlei.util.PropertiesUtil;
-import org.apache.commons.lang3.StringUtils;
+import com.yanlei.util.PropertyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
-import static com.yanlei.controller.showData.PoliticsController.fileURL;
+//import static com.yanlei.controller.showData.PoliticsController.fileURL;
 
 /**
  * @Author: x 经济左边数据展示
@@ -29,10 +26,7 @@ import static com.yanlei.controller.showData.PoliticsController.fileURL;
 public class JingJiController {
 
     //加载配置文件 读取K - V
-
-
-
-    Map<String, String> stringStringMap;
+   /* Map<String, String> stringStringMap;
 
     {
         try {
@@ -40,7 +34,7 @@ public class JingJiController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     @Autowired
     private JingJiService jingJiService;
@@ -59,8 +53,8 @@ public class JingJiController {
     public String showPageLeft(HttpServletResponse response) throws IOException {
         //response.addHeader("Access-Control-Allow-Origin", "*");
         //Map<String, String> stringStringMap = PropertiesUtil.GetAllProperties(fileURL);
-        String pageOne = stringStringMap.get("jingJiOne");///2018年2月主要完成指标情况
-
+        //String pageOne = stringStringMap.get("jingJiOne");///2018年2月主要完成指标情况
+        String pageOne = PropertyUtil.getProperty("jingJiOne");
         List<GovernmentDepartment> PageLists = jingJiService.findPageOne(pageOne);
 
         return JSON.toJSONString(PageLists);
@@ -82,8 +76,8 @@ public class JingJiController {
     public String showPageRightOne(HttpServletResponse response) throws IOException {
         //response.addHeader("Access-Control-Allow-Origin", "*");
 
-        String pageTwo = stringStringMap.get("jingJiTwo");//2018年2月街道经济
-
+        //String pageTwo = stringStringMap.get("jingJiTwo");//2018年2月街道经济
+        String pageTwo = PropertyUtil.getProperty("jingJiTwo");
         //List<GovernmentDepartment> PageLists = jingJiService.findPageTwo(pageTwo);
 
         JsonToJingji jsonToJingji = jingJiService.findPageTwo(pageTwo);
@@ -98,8 +92,8 @@ public class JingJiController {
     public String showPageRightTwo(HttpServletResponse response) throws IOException {
         //response.addHeader("Access-Control-Allow-Origin", "*");
 
-        String pageThree = stringStringMap.get("jingJiThree");//2018年2月财务收入
-
+        //String pageThree = stringStringMap.get("jingJiThree");//2018年2月财务收入
+        String pageThree = PropertyUtil.getProperty("jingJiThree");
         JsonToJingji jsonToJingji = jingJiService.findPageThree(pageThree);
         return JSON.toJSONString(jsonToJingji);
     }
@@ -112,7 +106,7 @@ public class JingJiController {
      * @return
      * @throws IOException
      */
-    @RequestMapping(value = "/updateProperties" , method = RequestMethod.POST,
+    /*@RequestMapping(value = "/updateProperties" , method = RequestMethod.POST,
             produces = "text/json;charset=UTF-8")
     @ResponseBody
     public String updateProperties(HttpServletResponse response, HttpServletRequest request) throws IOException {
@@ -131,6 +125,6 @@ public class JingJiController {
             }
         }
         return "error";
-    }
+    }*/
 }
 

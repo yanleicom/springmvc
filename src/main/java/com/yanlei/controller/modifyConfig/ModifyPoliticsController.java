@@ -3,8 +3,6 @@ package com.yanlei.controller.modifyConfig;
 import com.alibaba.fastjson.JSONArray;
 import com.yanlei.model.GovernmentDepartment;
 import com.yanlei.service.modifyConfigService.ModifyPoliticsService;
-import com.yanlei.service.showData.PoliticsService;
-import com.yanlei.util.PropertiesUtil;
 import com.yanlei.util.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import static com.yanlei.controller.showData.PoliticsController.fileURL;
+//import static com.yanlei.controller.showData.PoliticsController.fileURL;
 
 /**
  * @Author: x
@@ -42,7 +38,7 @@ public class ModifyPoliticsController {
      *
      */
 
-    @RequestMapping(value = "/updataConfig" , method = RequestMethod.POST,
+    /*@RequestMapping(value = "/updataConfig" , method = RequestMethod.POST,
             produces = "text/json;charset=UTF-8")
     @ResponseBody
     public String showData(String value,String upValue) {
@@ -64,7 +60,7 @@ public class ModifyPoliticsController {
             return "error";
         }
 
-    }
+    }*/
 
 
     /**

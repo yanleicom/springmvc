@@ -2,9 +2,8 @@ package com.yanlei.controller.showData;
 
 import com.alibaba.fastjson.JSON;
 import com.besjon.po.JsonRootBean;
-import com.yanlei.model.GovernmentDepartment;
 import com.yanlei.service.showData.PoliticsService;
-import com.yanlei.util.PropertiesUtil;
+import com.yanlei.util.PropertyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @Author: x
@@ -35,7 +29,7 @@ public class PoliticsController {
 
     private static final Logger log = LoggerFactory.getLogger(PoliticsController.class);
 
-    public static final String fileURL = "C:\\MultipartFile\\config.properties";
+   // public static final String fileURL = "C:\\MultipartFile\\config.properties";
 
     @Autowired
     private PoliticsService politicsService;
@@ -53,7 +47,7 @@ public class PoliticsController {
      * @return
      * @throws IOException
      */
-    @RequestMapping(value = "/showPoliticsLeft" , method = RequestMethod.GET,
+   /* @RequestMapping(value = "/showPoliticsLeft" , method = RequestMethod.GET,
             produces = "text/json;charset=UTF-8")
     @ResponseBody
     public String showPoliticsLeft(HttpServletResponse response) throws IOException {
@@ -61,10 +55,10 @@ public class PoliticsController {
         try {
             //读取配置文件去查询数据
             Map<String, String> stringStringMap = PropertiesUtil.GetAllProperties(fileURL);
-        /*for(Map.Entry<String, String> entry : stringStringMap.entrySet()){
+        *//*for(Map.Entry<String, String> entry : stringStringMap.entrySet()){
             log.info("键 key ："+entry.getKey()+" 值value ："+entry.getValue());
 
-        }*/
+        }*//*
             String oneName = stringStringMap.get("oneName");//使用人数 图一左边开始显示数据
             String twoName = stringStringMap.get("twoName");//活跃人数
             String threeName = stringStringMap.get("threeName");//公文办件量
@@ -92,7 +86,7 @@ public class PoliticsController {
         }
 
     }
-
+*/
 
 
     /**
@@ -106,8 +100,10 @@ public class PoliticsController {
     @ResponseBody
     public String showPoliticsRight() throws IOException {
 
-        Map<String, String> stringStringMap = PropertiesUtil.GetAllProperties(fileURL);
-        String eightName = stringStringMap.get("eightName");//分部门办件数
+        //Map<String, String> stringStringMap = PropertiesUtil.GetAllProperties(fileURL);
+       // String eightName = stringStringMap.get("eightName");//分部门办件数
+
+        String eightName = PropertyUtil.getProperty("eightName");
         //查询出三级类别的名称(分组)
         JsonRootBean jsonRootBean = politicsService.findLevel3(eightName);
 

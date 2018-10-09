@@ -24,7 +24,7 @@
 		<property name="jobDetail">
 			<ref bean="jobDetail_1" />
 		</property>
-		<!-- 每五分钟执行一次 0 0/5 * * * ?-->
+		<!-- 每五分钟执行一次 0 0/5    0 0/15 9-19 * * ?* * * ?-->
 		<property name="cronExpression">
 			<value>0 0/15 9-19 * * ?</value>
 		</property>

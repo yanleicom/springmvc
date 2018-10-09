@@ -16,6 +16,10 @@
         SELECT COUNT(0) AS intValue,streetname AS streetName FROM mzj_rkxxjl GROUP BY streetname
     </select>
 
+    <select id="findAgeClass" parameterType="com.yanlei.model.shehui.People" resultType="java.lang.String">
+        SELECT birthday FROM mzj_rkxxjl WHERE streetname = #{birthday}
+    </select>
+
     <select id="findZhlx" resultType="java.lang.String">
         SELECT zhlx FROM mzj_rkxxjl GROUP BY zhlx
     </select>

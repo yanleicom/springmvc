@@ -39,4 +39,5 @@ public interface SheHuiDao {
 
     List<BuildingArea> showBuildingArea();
 
+    List<String> findAgeClass(String streetName);
 }

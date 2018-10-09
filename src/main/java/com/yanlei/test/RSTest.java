@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.yanlei.controller.showData.PoliticsController.fileURL;
+//import static com.yanlei.controller.showData.PoliticsController.fileURL;
 
 /**
  * @Author: xiayuanlei
@@ -29,7 +29,7 @@ public class RSTest {
 
     }
 
-    @Test
+   /* @Test
     public void test1(){
 
         try {
@@ -38,9 +38,9 @@ public class RSTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
-    @Test
+   /* @Test
     public void test2(){
         try {
             Map<String, String> stringStringMap = PropertiesUtil.GetAllProperties(fileURL);
@@ -50,7 +50,7 @@ public class RSTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     @Test
     public void test3(){
@@ -83,7 +83,7 @@ public class RSTest {
             map.put("pageOne","2018年第一季度政务公开统计");
             map.put("pageTwo","2018年公文办理数据");
             //map.put("pageThree","各月份办件数");
-            PropertiesUtil.WritePropertiesAll(fileURL,map);
+            //PropertiesUtil.WritePropertiesAll(fileURL,map);
 
         } catch (Exception e) {
             e.printStackTrace();

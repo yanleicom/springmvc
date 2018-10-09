@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.yanlei.controller.showData.PoliticsController.fileURL;
 
 /**
  * @Author: x
@@ -30,7 +29,7 @@ public class WriteMap {
            // map.put("pageGongWen","公文数据");
             map.put("pageOne","2018年第二季度政务公开统计");
 
-            PropertiesUtil.WritePropertiesAll(fileURL,map);
+           // PropertiesUtil.WritePropertiesAll(fileURL,map);
         } catch (Exception e) {
             e.printStackTrace();
         }
