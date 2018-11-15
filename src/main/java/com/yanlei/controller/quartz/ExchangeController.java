@@ -48,7 +48,7 @@ public class ExchangeController {
         //response.addHeader("Access-Control-Allow-Origin", "*");
         String s = HttpDataUtil.httpGet2(exchange_url, null);
         if (StringUtils.isNotBlank(s)){
-            logger.info("交换量统计 ---->>>>  "+s);
+            //logger.info("交换量统计 ---->>>>  "+s);
             return s;
         }
         return null;
@@ -62,7 +62,7 @@ public class ExchangeController {
        // response.addHeader("Access-Control-Allow-Origin", "*");
         String s = HttpDataUtil.httpGet2(exchangeSum_url, null);
         if (StringUtils.isNotBlank(s)){
-            logger.info("交换总量统计 ---->>>>  "+s);
+           // logger.info("交换总量统计 ---->>>>  "+s);
             return s;
         }
         return null;
@@ -75,7 +75,7 @@ public class ExchangeController {
        // response.addHeader("Access-Control-Allow-Origin", "*");
         String s = HttpDataUtil.httpGet2(exchange_bumeng_url, null);
         if (StringUtils.isNotBlank(s)){
-            logger.info("今日交换部门统计 ---->>>> "+s);
+           // logger.info("今日交换部门统计 ---->>>> "+s);
             return s;
         }
         return null;
@@ -90,7 +90,7 @@ public class ExchangeController {
         //response.addHeader("Access-Control-Allow-Origin", "*");
         String s = HttpDataUtil.httpGet2(ShareList_url, null);
         if (StringUtils.isNotBlank(s)){
-            logger.info("数据共享 -->>  and -->> 数据归集 ---->>>> "+s);
+            //logger.info("数据共享 -->>  and -->> 数据归集 ---->>>> "+s);
             return s;
         }
         return null;
@@ -104,7 +104,7 @@ public class ExchangeController {
         //response.addHeader("Access-Control-Allow-Origin", "*");
         String s = HttpDataUtil.httpGet2(event_url, null);
         if (StringUtils.isNotBlank(s)){
-            logger.info("四个平台数据显示 -->>-->>--->>>>"+s);
+           // logger.info("四个平台数据显示 -->>-->>--->>>>"+s);
             return s;
         }
         return null;
@@ -123,7 +123,7 @@ public class ExchangeController {
        }*/
        String s = HttpDataUtil.httpGet2(government_url, null);
         if (StringUtils.isNotBlank(s)){
-            logger.info("政务平台季度数据统计 -->>"+s);
+            //logger.info("政务平台季度数据统计 -->>"+s);
             redisTemplate.opsForValue().set("第二季度政务公开",s,1,TimeUnit.DAYS);
             return s;
         }

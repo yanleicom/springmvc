@@ -41,7 +41,7 @@
         </layout>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>INFO</level>
-            <onMatch>ACCEPT</onMatch>
+            <onMatch>ACCEPT</onMatch>zh
             <onMismatch>DENY</onMismatch>
         </filter>
     </appender>
